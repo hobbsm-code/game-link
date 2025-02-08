@@ -24,39 +24,47 @@ export const ADD_USER = gql`
 }
 `;
 
-export const SAVE_BOOK = gql`
+export const SAVE_GAME = gql`
   mutation saveBook($input: BookInput!) {
     saveBook(input: $input) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
+      gameCount
+      savedGames {
+        gameId
+        publisher
+        short_descriptiondescription
         title
-        image
-        link
-      }
+        thumbnail
+        genre
+        platform
+        developer
+        release_date
+        freetogame_profile_url
     }
   }
+}
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_GAME = gql`
+  mutation removeGame($bookId: ID!) {
+    removeBook(gameId: $gameId) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        authors
-        description
+      gameCount
+      savedGames {
+        gameId
+        publisher
+        short_descriptiondescription
         title
-        image
-        link
+        thumbnail
+        genre
+        platform
+        developer
+        release_date
+        freetogame_profile_url
       }
     }
   }

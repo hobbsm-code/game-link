@@ -9,6 +9,9 @@ import { authenticateToken } from './services/auth.js';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
+
+import cors from 'cors';
+
 const server = new ApolloServer({
   typeDefs,
   resolvers
@@ -40,6 +43,24 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
     });
   }
+
+  app.use(cors());
+
+  app.get('/api/games', async (req:Request, res:Response) => {
+    try {
+      
+      const response = await fetch(`https://www.freetogame.com/api/games?category=${req.query.category}`);
+      const data = await response.json();
+      res.json(data);
+      
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching data' });
+    }
+  });
+
+
+
+  
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
