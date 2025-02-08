@@ -6,15 +6,21 @@ export const GET_ME = gql`
       _id
       username
       email
-      bookCount
+      gameCount
       savedGames {
-        bookId
-        authors
-        description
+        gameId
         title
-        image
-        link
+        short_description
+        game_url
+        genre
+        platform
+        publisher
+        developer
+        release_date
+        freetogame_profile_url
+        id
+        thumbnail
       }
-    }
   }
+}
 `;
