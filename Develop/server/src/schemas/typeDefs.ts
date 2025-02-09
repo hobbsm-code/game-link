@@ -1,9 +1,9 @@
-const typeDefs = `
-    input BookInput {
+const typeDefs = `#graphql
+    input GameInput {
         authors: [String]
         description: String
         title: String
-        bookId: ID!
+        gameId: ID!
         image: String
         link: String
     }
@@ -12,11 +12,11 @@ const typeDefs = `
         username: String!
         email: String!
         password: String!
-        savedBooks: [BookInput]
+        savedGames: [GameInput]
     }
 
-    type Book {
-        bookId: ID
+    type Game {
+        gameId: ID
         authors: [String]
         description: String
         title: String
@@ -28,8 +28,8 @@ const typeDefs = `
         _id: ID
         username: String
         email: String
-        bookCount: Int
-        savedBooks: [Book]
+        gameCount: Int
+        savedGames: [Game]
     }
         
     type Auth {
@@ -44,8 +44,8 @@ const typeDefs = `
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(input: UserInput!): Auth
-        saveBook(input: BookInput): User
-        removeBook(bookId: ID!): User
+        saveGame(input: GameInput): User
+        removeGame(gameId: ID!): User
     }
 `;
 

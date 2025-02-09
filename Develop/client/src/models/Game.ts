@@ -11,5 +11,4 @@ export interface Game {
   freetogame_profile_url: string;
   id: number;
   thumbnail: string;
-
 }

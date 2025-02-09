@@ -26,12 +26,12 @@ const SearchGames = () => {
 
   
 
-  // create state to hold saved bookId values
+  // create state to hold saved gameId values
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
 
   const [saveGame] = useMutation(SAVE_GAME);
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
+  // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
 
   
@@ -49,7 +49,7 @@ const SearchGames = () => {
     "martial-arts", "flight", "low-spec", "tower-defense", "horror", "mmorts"
   ].sort((a, b) => a.localeCompare(b)); // Sorts alphabetically
   
-  // create method to search for books and set state on form submit
+  // create method to search for games and set state on form submit
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -90,9 +90,9 @@ const SearchGames = () => {
     }
   };
 
-  // create function to handle saving a book to our database
+  // create function to handle saving a game to our database
   const handleSaveGame = async (gameId: string) => {
-    // find the book in `searchedBooks` state by the matching id
+    // find the game in `searchedGames` state by the matching id
     const gameToSave: Game = searchedGames.find((game) => game.gameId === gameId)!;
 
     // get token
@@ -107,7 +107,7 @@ const SearchGames = () => {
         variables: { input: gameToSave }
       });
 
-      // if game successfully saves to user's account, save book id to state
+      // if game successfully saves to user's account, save game id to state
       setSavedGameIds([...savedGameIds, gameToSave.gameId]);
     } catch (err) {
       console.error(err);
