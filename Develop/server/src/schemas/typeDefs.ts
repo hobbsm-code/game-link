@@ -32,6 +32,7 @@ const typeDefs = `
     type User {
         _id: ID
         username: String
+        email: String
         gameCount: Int
         savedGames: [Game]
     }
@@ -46,10 +47,8 @@ const typeDefs = `
     }
 
     type Mutation {
-        login(username: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
         addUser(input: UserInput!): Auth
-        saveGame(input: GameInput): User
-        removeGame(gameId: ID!): User
         saveGame(input: GameInput): User
         removeGame(gameId: ID!): User
     }
