@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import App from './App.jsx'
 import SearchGames from './pages/SearchGames.js'
-import SavedBooks from './pages/SavedGames.js'
+import SavedGames from './pages/SavedGames.js'
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         element: <SearchGames />
       }, {
         path: '/saved',
-        element: <SavedBooks />
+        element: <SavedGames />
       }
     ]
   }

@@ -14,7 +14,7 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation Mutation($input: UserInput!) {
+  mutation addUser($input: UserInput!) {
   addUser(input: $input) {
     token
     user {
@@ -22,6 +22,14 @@ export const ADD_USER = gql`
       username
       email
       password
+      savedGames {
+        gameId
+        authors
+        description
+        title
+        image
+        link
+      }
     }
   }
 }

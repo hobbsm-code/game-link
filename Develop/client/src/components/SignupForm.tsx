@@ -34,13 +34,14 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
     }
 
     try {
+      console.log("Submitting signup form:", userFormData);  // Debugging step
       const { data } = await addUser({
         variables: { input: { ...userFormData } },
       });
-
-      Auth.login(data.token);
+      console.log("Signup response:", data); // Debugging step
+      Auth.login(data.addUser.token);
     } catch (err) {
-      console.error(err);
+      console.error("Signup error:", err);
       setShowAlert(true);
     }
 

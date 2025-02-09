@@ -16,7 +16,7 @@ import { searchGameAPI } from '../utils/API';
 import { SAVE_GAME } from '../utils/mutations';
 import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
 import type { Game } from '../models/Game';
-import type { GameAPI } from '../models/GameAPI';
+
 
 const SearchGames = () => {
   // create state for holding returned google api data
@@ -72,7 +72,7 @@ const SearchGames = () => {
       console.log({items});
       
 
-      const gameData = items.map((game: GameAPI) => ({
+      const gameData = items.map((game: Game) => ({
         gameId: game.id,
         publisher: game.publisher || ['No publisher to display'],
         title: game.title,

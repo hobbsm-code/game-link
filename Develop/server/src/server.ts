@@ -25,8 +25,18 @@ const startApolloServer = async () => {
   await db();
 
   const PORT = process.env.PORT || 3001;
+
   const app = express();
 
+
+// ✅ Enable CORS to allow frontend requests
+app.use(cors({
+  origin: 'http://localhost:3000',  // Allow frontend access
+  credentials: true,  // Allow cookies/auth headers
+  methods: 'GET,POST,PUT,DELETE,OPTIONS'
+}));
+
+  // app.use(cors());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
 
@@ -44,7 +54,7 @@ const startApolloServer = async () => {
     });
   }
 
-  app.use(cors());
+ 
 
   app.get('/api/games', async (req:Request, res:Response) => {
     try {

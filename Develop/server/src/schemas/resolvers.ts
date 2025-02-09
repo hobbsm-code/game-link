@@ -64,10 +64,19 @@ export const resolvers = {
             return { token, user };
         },
         addUser: async (_parent: any, { input }: AddUserArgs) => {
+            try {
+            console.log("Received signup data:", input);
             const user = await User.create({ ...input });
+            console.log("User created successfully:", user);
             const token = signToken(user.username, user.email, user._id);
             return { token, user };
+            }
+            catch (err) {
+                console.error("Signup error:", err);
+            throw new Error ("Error creating user");
+            }
         },
+
         saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(

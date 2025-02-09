@@ -24,7 +24,7 @@ export const createUser = async (req: Request, res: Response) => {
   if (!user) {
     return res.status(400).json({ message: 'Something is wrong!' });
   }
-  const token = signToken(user.username, user.password, user._id);
+  const token = signToken(user.username, user.email, user._id);
   return res.json({ token, user });
 };
 
