@@ -1,32 +1,33 @@
-import User from '../models/User.js';
-import { signToken, AuthenticationError } from '../services/auth.js'; 
+import User from "../models/User";
+import { signToken, AuthenticationError } from "../services/auth";
 
 interface LoginUserArgs {
-    email: string;
+    username: string;
     password: string;
 }
 
 interface AddUserArgs {
     input: {
         username: string;
-        email: string;
         password: string;
     }
 }
 
-interface SaveBookArgs {
+interface SaveGameArgs {
     input: {
-        authors: string[];
-        description: string;
-        bookId: string;
-        image: string;
-        link: string;
+        id: string;
         title: string;
+        thumbnail: string;
+        short_description: string;
+        game_url: string;
+        genre: string;
+        platform: string;
+        time_played: number;
     }
 }
 
-interface RemoveBookArgs {
-    bookId: string;
+interface RemoveGameArgs {
+    gameId: string;
 }
 
 export const resolvers = {
@@ -34,15 +35,15 @@ export const resolvers = {
         me: async (_parent: any, _args: any, context: any) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
-                    .populate('savedBooks')
+                    .populate('savedGames')
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
         },
     },
     Mutation: {
-        login: async (_parent: any, { email, password }: LoginUserArgs) => {
-            const user = await User.findOne({ email });
+        login: async (_parent: any, { username, password }: LoginUserArgs) => {
+            const user = await User.findOne({ username });
 
             if (!user) {
                 throw new AuthenticationError('Incorrect credentials');
@@ -54,36 +55,42 @@ export const resolvers = {
                 throw new AuthenticationError('Incorrect credentials');
             }
 
-            const token = signToken(user.username, user.email, user._id);
+            const token = signToken(user.username, user.password, user._id);
 
             return { token, user };
         },
         addUser: async (_parent: any, { input }: AddUserArgs) => {
-            const user = await User.create({ ...input });
-            const token = signToken(user.username, user.email, user._id);
+            const user = await User.create(input);
+
+            if (!user) {
+                throw new AuthenticationError('Something is wrong!');
+            }
+            const token = signToken(user.username, user.password, user._id);
             return { token, user };
         },
-        saveBook: async (_parent: any, { input }: SaveBookArgs, context: any) => {
-            if (context.user) {
+        saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
+            try {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $addToSet: { savedBooks: input } },
-                    { new: true }
+                    { $addToSet: { savedGames: input } },
+                    { new: true, runValidators: true }
                 );
                 return updatedUser;
+            } catch (err) {
+                console.log(err);
+                throw new AuthenticationError('Cannot save game');
             }
-            throw new AuthenticationError('You need to be logged in!');
         },
-        removeBook: async (_parent: any, { bookId }: RemoveBookArgs, context: any) => {
-            if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $pull: { savedBooks: { bookId } } },
-                    { new: true }
-                );
-                return updatedUser;
+        removeGame: async (_parent: any, { gameId }: RemoveGameArgs, context: any) => {
+            const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { savedGames: { game_id: gameId } } },
+                { new: true }
+            );
+            if (!updatedUser) {
+                throw new AuthenticationError('Cannot remove game');
             }
-            throw new AuthenticationError('You need to be logged in!');
+            return updatedUser;
         },
     },
 };

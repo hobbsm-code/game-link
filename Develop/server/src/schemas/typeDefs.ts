@@ -1,37 +1,42 @@
+import e from "express";
+
 const typeDefs = `
-    input BookInput {
-        authors: [String]
-        description: String
+    input GameInput {
+        id: ID!
         title: String
-        bookId: ID!
-        image: String
-        link: String
+        thumbnail: String
+        short_description: String
+        game_url: String
+        genre: String
+        platform: String
+        time_played: Float
     }
 
     input UserInput {
         username: String!
-        email: String!
         password: String!
-        savedBooks: [BookInput]
+        email: String!
+        savedGames: [GameInput]
     }
 
-    type Book {
-        bookId: ID
-        authors: [String]
-        description: String
+    type Game {
+        id: ID
         title: String
-        image: String
-        link: String
+        thumbnail: String
+        short_description: String
+        game_url: String
+        platform: String
+        genre: String
+        time_played: Float
     }
 
     type User {
         _id: ID
         username: String
-        email: String
-        bookCount: Int
-        savedBooks: [Book]
+        gameCount: Int
+        savedGames: [Game]
     }
-        
+
     type Auth {
         token: ID!
         user: User
@@ -42,10 +47,10 @@ const typeDefs = `
     }
 
     type Mutation {
-        login(email: String!, password: String!): Auth
+        login(username: String!, password: String!): Auth
         addUser(input: UserInput!): Auth
-        saveBook(input: BookInput): User
-        removeBook(bookId: ID!): User
+        saveGame(input: GameInput): User
+        removeGame(gameId: ID!): User
     }
 `;
 
