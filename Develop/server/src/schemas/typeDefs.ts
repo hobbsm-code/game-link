@@ -50,6 +50,8 @@ const typeDefs = `
         addUser(input: UserInput!): Auth
         saveGame(input: GameInput): User
         removeGame(gameId: ID!): User
+        saveGame(input: GameInput): User
+        removeGame(gameId: ID!): User
     }
 `;
 

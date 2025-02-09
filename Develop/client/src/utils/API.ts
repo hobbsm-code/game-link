@@ -1,5 +1,5 @@
 import type { User } from '../models/User.js';
-import type { Book } from '../models/Book.js';
+import type { Game } from '../models/Game.js';
 
 // route to get logged in user's info (needs the token)
 export const getMe = (token: string) => {
@@ -31,21 +31,21 @@ export const loginUser = (userData: User) => {
   });
 };
 
-// save book data for a logged in user
-export const saveBook = (bookData: Book, token: string) => {
+// save game data for a logged in user
+export const saveGame = (gameData: Game, token: string) => {
   return fetch('/api/users', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(bookData),
+    body: JSON.stringify(gameData),
   });
 };
 
-// remove saved book data for a logged in user
-export const deleteBook = (bookId: string, token: string) => {
-  return fetch(`/api/users/books/${bookId}`, {
+// remove saved game data for a logged in user
+export const deleteGame = (gameId: string, token: string) => {
+  return fetch(`/api/users/games/${gameId}`, {
     method: 'DELETE',
     headers: {
       authorization: `Bearer ${token}`,
@@ -53,8 +53,35 @@ export const deleteBook = (bookId: string, token: string) => {
   });
 };
 
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query: string) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+// Load Games from the API
+
+// export const searchGameAPI = (category:string) => {
+//   return fetch(`http://localhost:3001/api/games?category=${category}`);
+// };
+
+// Get Games from the API
+
+// export const searchGameAPI = () => {
+//   return fetch(`api/games`, {
+//     method: 'GET',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     }
+//   });
+  
+// }
+
+export const searchGameAPI = (category?: string) => {
+  return fetch(`api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  });
 };
+
+
+
+// export const searchGameAPI = (category:string) => {
+//   return fetch(`api/games?category=${category}`);
+// };
+
+

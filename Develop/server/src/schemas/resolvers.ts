@@ -14,6 +14,7 @@ interface AddUserArgs {
 }
 
 interface SaveGameArgs {
+interface SaveGameArgs {
     input: {
         id: string;
         title: string;
@@ -28,6 +29,8 @@ interface SaveGameArgs {
 
 interface RemoveGameArgs {
     gameId: string;
+interface RemoveGameArgs {
+    gameId: string;
 }
 
 export const resolvers = {
@@ -35,6 +38,7 @@ export const resolvers = {
         me: async (_parent: any, _args: any, context: any) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
+                    .populate('savedGames')
                     .populate('savedGames')
                 return userData;
             }
@@ -67,6 +71,11 @@ export const resolvers = {
             }
             const token = signToken(user.username, user.password, user._id);
             return { token, user };
+            }
+            catch (err) {
+                console.error("Signup error:", err);
+            throw new Error ("Error creating user");
+            }
         },
         saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
             try {
