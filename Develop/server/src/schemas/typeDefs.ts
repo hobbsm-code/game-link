@@ -1,13 +1,19 @@
 
 const typeDefs = `
     input GameInput {
-        id: ID!
+        gameId: ID!
         title: String
-        thumbnail: String
         short_description: String
         game_url: String
         genre: String
         platform: String
+        publisher: String
+        developer: String
+        release_date: String
+        freetogame_profile_url: String
+        id: Int
+        thumbnail: String
+        category: String
         time_played: Float
     }
 
@@ -19,13 +25,19 @@ const typeDefs = `
     }
 
     type Game {
-        id: ID
+        gameId: ID
         title: String
-        thumbnail: String
         short_description: String
         game_url: String
-        platform: String
         genre: String
+        platform: String
+        publisher: String
+        developer: String
+        release_date: String
+        freetogame_profile_url: String
+        id: Int
+        thumbnail: String
+        category: String
         time_played: Float
     }
 

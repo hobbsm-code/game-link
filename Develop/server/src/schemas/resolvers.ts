@@ -16,14 +16,20 @@ interface AddUserArgs {
 
 interface SaveGameArgs {
     input: {
-        id: string;
+        gameId: string;
         title: string;
-        thumbnail: string;
         short_description: string;
         game_url: string;
         genre: string;
         platform: string;
-        time_played: number;
+        publisher: string;
+        developer: string;
+        release_date: string;
+        freetogame_profile_url: string;
+        id: number;
+        thumbnail: string;
+        category: string;
+        time_played?: number;
     }
 }
 
@@ -76,17 +82,15 @@ export const resolvers = {
             }
         },
         saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
-            try {
+            if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
                     { $addToSet: { savedGames: input } },
                     { new: true, runValidators: true }
                 );
                 return updatedUser;
-            } catch (err) {
-                console.log(err);
-                throw new AuthenticationError('Cannot save game');
             }
+            throw new AuthenticationError('Cannot save game');            
         },
         removeGame: async (_parent: any, { gameId }: RemoveGameArgs, context: any) => {
             const updatedUser = await User.findOneAndUpdate(
