@@ -1,8 +1,8 @@
-import { Game } from './Game';
+import type { Game } from './Game';
 
 export interface User {
-    username: string | null;
-    password: string | null;
-    email: string | null;
-    savedGames: Game[];
+  username: string | null;
+  email: string | null;
+  password: string | null;
+  savedGames: Game[];
 }

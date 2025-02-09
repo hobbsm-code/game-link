@@ -45,6 +45,6 @@ const gameSchema = new Schema<GameDocument>({
     default: 0,
     required: false,
   },
-});
+} as const);
 
 export default gameSchema;

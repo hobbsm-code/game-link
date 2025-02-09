@@ -17,6 +17,6 @@ export const GET_ME = gql`
         platform
         time_played
       }
-    }
   }
+}
 `;
