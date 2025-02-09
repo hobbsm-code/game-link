@@ -5,10 +5,19 @@ import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 
 import Auth from '../utils/auth';
+// fetch the user info from the database
+import { useQuery } from '@apollo/client';
+import { GET_ME } from '../utils/queries';
+
+
+
 
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
+  const { data } = useQuery(GET_ME);
+
+  const user = data?.me || {};
 
   return (
     <>
@@ -30,6 +39,9 @@ const AppNavbar = () => {
                     See Your Games
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+                  {/* Display the logged-in username */}
+                  <Nav.Link disabled>Welcome {user.username}!</Nav.Link>
+
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>

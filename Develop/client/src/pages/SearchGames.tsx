@@ -188,6 +188,7 @@ const SearchGames = () => {
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>
+                      
                     )}
                   </Card.Body>
                 </Card>
