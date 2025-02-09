@@ -1,4 +1,3 @@
-import e from "express";
 
 const typeDefs = `
     input GameInput {

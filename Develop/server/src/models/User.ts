@@ -7,8 +7,8 @@ import type { GameDocument } from './Game.js';
 export interface UserDocument extends Document {
     id: string;
     username: string;
-    password: string;
     email: string;
+    password: string;    
     savedGames: GameDocument[];
     isCorrectPassword(password: string): Promise<boolean>;
     gameCount: number;
@@ -21,14 +21,15 @@ const userSchema = new Schema<UserDocument>(
             required: true,
             unique: true,
         },
-        password: {
-            type: String,
-            required: true,
-        },
         email: {
             type: String,
             required: true,
             unique: true,
+            match: [/.+@.+\..+/, 'Must match an email address!'],
+        },
+        password: {
+            type: String,
+            required: true,
         },
         savedGames: [gameSchema],
     },

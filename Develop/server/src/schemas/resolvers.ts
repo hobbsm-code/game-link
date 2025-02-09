@@ -1,5 +1,5 @@
-import User from "../models/User";
-import { signToken, AuthenticationError } from "../services/auth";
+import User from "../models/User.js";
+import { signToken, AuthenticationError } from "../services/auth.js";
 
 interface LoginUserArgs {
     username: string;
