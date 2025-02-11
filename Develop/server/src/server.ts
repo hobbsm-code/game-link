@@ -28,10 +28,11 @@ const startApolloServer = async () => {
 
   const app = express();
 
+  const origin = process.env.NODE_ENV === 'production' ? 'https://game-link.onrender.com' : 'http://localhost:3000';
 
 // ✅ Enable CORS to allow frontend requests
 app.use(cors({
-  origin: 'http://localhost:3000',  // Allow frontend access
+  origin: origin,  // Allow frontend access
   credentials: true,  // Allow cookies/auth headers
   methods: 'GET,POST,PUT,DELETE,OPTIONS'
 }));
