@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
 
-import cors from 'cors';
+// import cors from 'cors';
 
 const server = new ApolloServer({
   typeDefs,
@@ -29,12 +29,12 @@ const startApolloServer = async () => {
   const app = express();
 
 
-// ✅ Enable CORS to allow frontend requests
-app.use(cors({
-  origin: 'http://localhost:3000',  // Allow frontend access
-  credentials: true,  // Allow cookies/auth headers
-  methods: 'GET,POST,PUT,DELETE,OPTIONS'
-}));
+  // ✅ Enable CORS to allow frontend requests
+  // app.use(cors({
+  //   origin: 'http://localhost:3000',  // Allow frontend access
+  //   credentials: true,  // Allow cookies/auth headers
+  //   methods: 'GET,POST,PUT,DELETE,OPTIONS'
+  // }));
 
   // app.use(cors());
   app.use(express.urlencoded({ extended: false }));
@@ -56,21 +56,17 @@ app.use(cors({
 
  
 
-  app.get('/api/games', async (req:Request, res:Response) => {
-    try {
+  // app.get('/api/games', async (req:Request, res:Response) => {
+  //   try {
       
-      const response = await fetch(`https://www.freetogame.com/api/games?category=${req.query.category}`);
-      const data = await response.json();
-      res.json(data);
+  //     const response = await fetch(`https://www.freetogame.com/api/games?category=${req.query.category}`);
+  //     const data = await response.json();
+  //     res.json(data);
       
-    } catch (error) {
-      res.status(500).json({ error: 'Error fetching data' });
-    }
-  });
-
-
-
-  
+  //   } catch (error) {
+  //     res.status(500).json({ error: 'Error fetching data' });
+  //   }
+  // });
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
