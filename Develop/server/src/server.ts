@@ -57,7 +57,7 @@ app.use(cors({
 
  
 
-  app.get('/api/games', async (req:Request, res:Response) => {
+  app.get('/games', async (req:Request, res:Response) => {
     try {
       
       const response = await fetch(`https://www.freetogame.com/api/games?category=${req.query.category}`);
