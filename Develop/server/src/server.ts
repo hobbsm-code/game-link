@@ -39,7 +39,8 @@ const startApolloServer = async () => {
 app.use(cors({
   origin: ["https://game-link-7umt.onrender.com", "http://localhost:3000"], // Allow both frontend URLs
   methods: "GET,POST",
-  allowedHeaders: "Content-Type,Authorization"
+  allowedHeaders: "Content-Type,Authorization",
+  credentials: true
 }));
 
   // app.use(cors());
