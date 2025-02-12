@@ -63,8 +63,7 @@ export const deleteGame = (gameId: string, token: string) => {
 // };
 
 export const searchGameAPI = (category?: string) => {
-  return fetch (`https://www.freetogame.com/api/games?category=${category}`);
-
+  return fetch (`https://game-link-backend.onrender.com/api/games?category=${category}`);
 }
 
 
