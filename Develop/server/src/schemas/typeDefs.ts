@@ -1,5 +1,5 @@
 
-const typeDefs = `
+const typeDefs = `#graphql
     input GameInput {
         gameId: ID!
         title: String
@@ -47,6 +47,7 @@ const typeDefs = `
         email: String
         gameCount: Int
         savedGames: [Game]
+        time_played: Float
     }
 
     type Auth {
@@ -54,8 +55,16 @@ const typeDefs = `
         user: User
     }
 
+    type LeaderboardEntry {
+    username: String
+    gameId: String
+    title: String
+    totalTimePlayed: Float
+}
+
     type Query {
         me: User
+        getLeaderboard: [LeaderboardEntry]
     }
 
     type Mutation {
@@ -63,6 +72,8 @@ const typeDefs = `
         addUser(input: UserInput!): Auth
         saveGame(input: GameInput): User
         removeGame(gameId: ID!): User
+        submitPlaytime(gameId: ID!, hours: Float): Game
+        
     }
 `;
 
