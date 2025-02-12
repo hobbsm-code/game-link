@@ -20,11 +20,15 @@ body {
     background-size: cover;
     text-align: center;
     justify-content: center;
-}
-.bar {
-  justify-tracks: center;
-  box-shadow: #000; 
-}
+      border: 2px solid #00FFFF;
+      padding: 5px;
+      text-align: center;
+      border-radius: 1px;
+      width: 60%;
+      margin: 50px auto;
+  }
+
+
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
@@ -38,21 +42,7 @@ h1, h2, h3, h4, h5, h6 {
     font-style: italic;
 }
 
-/* Buttons */
-button {
-    font-size: 16px;
-    padding: 10px;
-    border: 2px solid #00FFFF;
-    background-color: transparent;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
 
-button:hover {
-    background-color: #00FFFF;
-    color: #000;
-}
 /* Landing Page Background */
 .landing-page {
   background: url('../assets/landing-bg.jpg') no-repeat center center fixed;
@@ -65,9 +55,12 @@ button:hover {
 header {
   display: flex;
   justify-content: space-between;
+  align-self: start;
+  
   padding: 15px 20px;
   background-color: #111;
   border-bottom: 2px solid #00FFFF;
+  align-items: bottom;
 }
 .mb-5, .pt-5 {
   font-size: 50px;
@@ -125,12 +118,6 @@ text-align: center;
   border: 2px solid #00FFFF;
 }
 /* Main Page Background */
-.main-page {
-  background: url('../assets/main-bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  padding: 50px 20px;
-}
-
 /* Sidebar for Favorite Games */
 .favorite-games {
   width: 250px;
@@ -256,4 +243,61 @@ footer {
 }
 .pt-5 h2{
   background-color: transparent;
+}
+.form-select {
+  background: rgba(0, 0, 0, 0.8); /* Transparent black */;
+  color: #00FF00;
+  border: 2px solid #00FFFF;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.form-select:focus {
+  box-shadow: 0 0 5px #00FFFF;
+  border-color: #00FF00;
+}
+/* 🔹 Buttons */
+button {
+  background: transparent;
+  border: 2px solid #00FFFF;
+  color: #00FFFF;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #00FFFF;
+  color: #000;
+  box-shadow: 0 0 10px #00FFFF;
+}
+
+/* 🔹 Game Cards */
+.card {
+  background: #111;
+  border: 2px solid #00FFFF;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00FFFF;
+}
+
+.card-title a {
+  color: #00FFFF;
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  color: #00FF00;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px), (max-hieght: 768px) {
+  .form-container {
+      width: 90%;
+  }
 }
