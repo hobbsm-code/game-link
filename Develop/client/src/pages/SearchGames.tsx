@@ -49,6 +49,7 @@ const SearchGames = () => {
        let category = encodeURIComponent(searchInput.trim());
 
       const response = await searchGameAPI(category);
+      console.log({response});
       
       
       if (!response.ok) {
