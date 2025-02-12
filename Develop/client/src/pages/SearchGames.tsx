@@ -118,7 +118,9 @@ const SearchGames = () => {
     <>
       <div className="text-light bg-dark p-5">
         <Container>
-          <h1>Search for Games!</h1>
+          <h1>Come join our community of gamers. 
+              Learn tips, Get tricks, & the latest news on your favorite games.
+              Search and enjoy!!!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
