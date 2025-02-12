@@ -15,7 +15,7 @@ export const saveGameIds = (gameIdArr: string[]) => {
 };
 
 export const removeGameId = (gameId: string) => {
-  const savedGameIds = localStorage.getItem('saved_game')
+  const savedGameIds = localStorage.getItem('saved_games')
     ? JSON.parse(localStorage.getItem('saved_games')!)
     : null;
 
@@ -27,4 +27,6 @@ export const removeGameId = (gameId: string) => {
   localStorage.setItem('saved_games', JSON.stringify(updatedSavedGameIds));
 
   return true;
+
 };
+

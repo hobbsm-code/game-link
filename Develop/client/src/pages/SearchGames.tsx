@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import type { FormEvent } from 'react';
+
 import {
   Container,
   Col,
@@ -14,31 +15,17 @@ import Auth from '../utils/auth';
 
 import { searchGameAPI } from '../utils/API';
 import { SAVE_GAME } from '../utils/mutations';
-import { saveGameIds, getSavedGameIds } from '../utils/localStorage';
+import {  getSavedGameIds } from '../utils/localStorage';
 import type { Game } from '../models/Game';
 
 
 const SearchGames = () => {
-  // create state for holding returned google api data
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
-  // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
-
-  
-
-  // create state to hold saved gameId values
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
 
   const [saveGame] = useMutation(SAVE_GAME);
 
-  // set up useEffect hook to save `savedGameIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
-
-  
-  
-  useEffect(() => {
-    return () => saveGameIds(savedGameIds);
-  }, [savedGameIds]);
   
   const categories = [
     "mmorpg", "shooter", "strategy", "moba", "racing", "sports", "social", "sandbox",
@@ -122,14 +109,7 @@ const SearchGames = () => {
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
-                {/* <Form.Select
-                  name='searchInput'
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  // type='text'
-                  size='lg'
-                  // placeholder='Search for a game by genre (Shooter,Strategy,MMORPG etc.)'
-                /> */}
+                
                 <Form.Select
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
@@ -175,10 +155,11 @@ const SearchGames = () => {
                     <Card.Title>{game.title}</Card.Title>
                     <p className='small'>Authors: {game.publisher}</p>
                     <Card.Text>{game.short_description}</Card.Text>
-                    <Card.Title><a href={game.freetogame_profile_url} target="_blank" rel="noopener nonreferrer"> View {game.title} on freetogame.com </a>
+                    <Card.Title><a href={game.freetogame_profile_url} target="_blank" rel="noopener noreferrer"> View {game.title} on freetogame.com </a>
                     </Card.Title>
-
                     
+                    
+
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
@@ -201,134 +182,4 @@ const SearchGames = () => {
 };
 
 export default SearchGames;
-
-// // src/App.tsx
-// // import React, { useEffect, useState } from 'react';
-
-// // Define a TypeScript interface for a game
-// interface Game {
-//   id: number;
-//   title: string;
-//   short_description: string;
-//   thumbnail: string;
-//   freetogame_profile_url: string;
-//   // Add other properties as needed (e.g., thumbnail, description)
-// }
-
-// // const App: React.FC = () => {
-// //   const [games, setGames] = useState<Game[]>([]);
-// //   const [error, setError] = useState<string | null>(null);
-
-// //   // Fetch the game data from the back end when the component mounts
-// //   useEffect(() => {
-// //     const fetchGames = async () => {
-// //       try {
-// //         const response = await fetch('/api/games');
-// //         if (!response.ok) {
-// //           throw new Error('Network response was not ok');
-// //         }
-// //         // Assuming the API returns an array of games
-// //         const data: Game[] = await response.json();
-// //         setGames(data);
-// //       } catch (error: any) {
-// //         setError(error.message);
-// //         console.error('Error fetching games:', error);
-// //       }
-// //     };
-
-// //     fetchGames();
-// //   }, []);
-
-// //   return (
-// //     <div>
-// //       <h1>Shooter Games</h1>
-// //       {error && <p>Error: {error}</p>}
-// //       <ul>
-// //         {games.map((game) => (
-// //           <div>
-// //           <li key={game.id}>{game.title}</li>
-// //           <li key={game.id}>{game.short_description}</li>
-// //           <li key={game.id}></li>
-// //             <img src={game.thumbnail} alt={game.title} />
-// //           <li key={game.id}></li>
-// //           <li key={game.id}>{game.freetogame_profile_url}</li>
-// //           </div>
-// //         ))}
-// //       </ul>
-// //     </div>
-// //   );
-// // };
-// // src/App.tsx
-// import React, { useEffect, useState, FormEvent } from 'react';
-// import {searchGameAPI} from '../utils/API';
-// // Define a TypeScript interface for a game object (adjust properties as needed)
-
-
-// const App: React.FC = () => {
-//   const [games, setGames] = useState<Game[]>([]);
-//   const [category, setCategory] = useState<string>('Shooter');
-//   const [search, setSearch] = useState<string>('');
-//   const [error, setError] = useState<string | null>(null);
-
-//   // Function to fetch games by category from your back-end endpoint
-//   const fetchGames = async (category: string) => {
-//     try {
-//       const response = await  searchGameAPI(category);
-//       ;
-//       if (!response.ok) {
-//         throw new Error('Network response was not ok');
-//       }
-//       const data: Game[] = await response.json();
-//       setGames(data);
-//     } catch (error: any) {
-//       setError(error.message);
-//       console.error('Error fetching games:', error);
-//     }
-//   };
-
-//   // Fetch games when the component mounts and whenever the category changes
-//   useEffect(() => {
-//     fetchGames(category);
-//   }, [category]);
-
-//     fetchGames(category);
-    
-//   // Handle form submission to update the category
-//   const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
-//     e.preventDefault();
-//     if (search.trim() !== '') {
-//       setCategory(search.trim());
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <h1>Search Games by Category</h1>
-//       <form onSubmit={handleSearchSubmit}>
-//         <input
-//           type="text"
-//           value={search}
-//           onChange={(e) => setSearch(e.target.value)}
-//           placeholder="Enter category (e.g., Shooter, RPG, etc.)"
-//         />
-//         <button type="submit">Search</button>
-//       </form>
-//       {error && <p style={{ color: 'red' }}>Error: {error}</p>}
-//       <ul>
-//         {games.map((game) => (
-//           <>
-//           <li key={game.id}>{game.title}</li>
-//           <li key={game.id}> {game.thumbnail}</li>
-//           </>
-          
-          
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default App;
-
-
 
