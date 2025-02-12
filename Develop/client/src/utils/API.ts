@@ -53,31 +53,19 @@ export const deleteGame = (gameId: string, token: string) => {
   });
 };
 
-// Load Games from the API
 
-// export const searchGameAPI = (category:string) => {
-//   return fetch(`http://localhost:3001/api/games?category=${category}`);
+
+// export const searchGameAPI = (category?: string) => {
+//   return fetch(`https://game-link-backend.onrender.com/api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//   });
 // };
 
-// Get Games from the API
-
-// export const searchGameAPI = () => {
-//   return fetch(`api/games`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     }
-//   });
-  
-// }
-
 export const searchGameAPI = (category?: string) => {
-  return fetch(`https://game-link-backend.onrender.com/api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
+  return fetch (`https://www.freetogame.com/api/games?category=${category}`);
 
+}
 
 
 // export const searchGameAPI = (category:string) => {
