@@ -29,11 +29,17 @@ const startApolloServer = async () => {
   const app = express();
 
 
-// ✅ Enable CORS to allow frontend requests
+// // ✅ Enable CORS to allow frontend requests
+// app.use(cors({
+//   origin: 'http://localhost:3000',  // Allow frontend access
+//   credentials: true,  // Allow cookies/auth headers
+//   methods: 'GET,POST,PUT,DELETE,OPTIONS'
+// }));
+
 app.use(cors({
-  origin: 'http://localhost:3000',  // Allow frontend access
-  credentials: true,  // Allow cookies/auth headers
-  methods: 'GET,POST,PUT,DELETE,OPTIONS'
+  origin: ["https://game-link-7umt.onrender.com", "http://localhost:3000"], // Allow both frontend URLs
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type,Authorization"
 }));
 
   // app.use(cors());
