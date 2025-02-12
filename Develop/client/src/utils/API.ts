@@ -56,7 +56,8 @@ export const deleteGame = (gameId: string, token: string) => {
 
 
 export const searchGameAPI = (category?: string) => {
-  return fetch(`https://game-link-backend.onrender.com/api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
+  return fetch(`/api/games${category ? `?category=${(category)}` : ''}` 
+    ,{
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
