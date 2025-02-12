@@ -72,11 +72,18 @@ export const deleteGame = (gameId: string, token: string) => {
 // }
 
 export const searchGameAPI = (category?: string) => {
-  return fetch(`api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+  return fetch(`https://cors-anywhere.herokuapp.com/https://www.freetogame.com/api/games?category=${category}`, {
+    // mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' }
   });
 };
+
+// export const searchGameAPI = (category?: string) => {
+//   return fetch(`/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//   });
+// };
 
 
 

@@ -12,4 +12,5 @@ export interface Game {
   id: number;
   thumbnail: string;
   category: string;
+  time_played: number;
 }
