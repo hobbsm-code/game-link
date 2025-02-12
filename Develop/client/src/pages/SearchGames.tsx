@@ -116,11 +116,11 @@ const SearchGames = () => {
 
   return (
     <>
-      <div className="text-light bg-dark p-5">
-        <Container>
+      <div className="form-container">
+        <Container className='mb-5'>
           <h1>Come join our community of gamers. 
               Learn tips, Get tricks, & the latest news on your favorite games.
-              Search and enjoy!!!</h1>
+              </h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
               <Col xs={12} md={8}>
@@ -137,7 +137,7 @@ const SearchGames = () => {
               onChange={(e) => setSearchInput(e.target.value)}
               size="lg"
             >
-              <option value="">Select a Category</option>
+              <option className= 'bar' value="">Select a Category</option>
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category.replace(/-/g, " ").toUpperCase()} {/* Formats text */}
@@ -155,15 +155,16 @@ const SearchGames = () => {
             </Row>
           </Form>
         </Container>
-      </div>
-
-      <Container>
         <h2 className='pt-5'>
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results
             `
             : 'Search for a game to begin'}
         </h2>
+      </div>
+
+      <Container>
+        
          
         <Row>
           {searchedGames.map((game) => {

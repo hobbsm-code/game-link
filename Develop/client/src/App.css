@@ -14,12 +14,16 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Rubik+Mono+One&display=swap');
 
 /* General Styles */
-body {
+.form-container {
     font-family: 'Rubik', sans-serif;
-    background-color: #000;
-    color: #fff;
-    margin: 0;
-    padding: 0;
+    background:url('./src/assets/img/background2.jpg') no-repeat center fixed;
+    background-size: cover;
+    text-align: center;
+    justify-content: center;
+}
+.bar {
+  justify-tracks: center;
+  box-shadow: #000; 
 }
 
 /* Headings */
@@ -65,8 +69,18 @@ header {
   background-color: #111;
   border-bottom: 2px solid #00FFFF;
 }
+.mb-5, .pt-5 {
+  font-size: 50px;
+  color: #00FFFF;
+  text-shadow: 0 0 10px #141414;
+  
+}
+.pt-5 h2{
+text-align: center;
 
-.logo h1 {
+}
+
+.logo h1, .mb-5 h2 {
   font-size: 50px;
   color: #00FFFF;
   text-shadow: 0 0 10px #00FFFF;
@@ -86,13 +100,13 @@ header {
 }
 
 /* Search Section */
-.search-section {
+.container {
   margin-top: 20px;
   background-color: transparent;
   text-size-adjust: 12px;
 }
 
-.search-bar {
+.Form{
   padding: 10px;
   font-size: 12px;
   width: 350px;
