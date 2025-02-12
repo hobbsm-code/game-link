@@ -72,7 +72,7 @@ export const deleteGame = (gameId: string, token: string) => {
 // }
 
 export const searchGameAPI = (category?: string) => {
-  return fetch(`api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
+  return fetch(`https://game-link-backend.onrender.com/api/games${category ? `?category=${encodeURIComponent(category)}` : ''}` ,{
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   });
