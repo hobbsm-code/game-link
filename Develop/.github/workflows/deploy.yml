@@ -3,9 +3,7 @@ name: Deploy
 
 # Trigger the workflow on push and pull request events to the release branch
 on:
-  pull_request:
-    types:
-      - closed
+  push:
     branches:
       - release
 
@@ -22,8 +20,8 @@ jobs:
 
       # Define a step named "Deploy"
       - name: Deploy
-        # Only run this step if the branch is main
-        if: github.event.pull_request.merged == true
+        # Only run this step if the branch is release
+        if: github.ref == 'refs/heads/release'
         # Set an environment variable with the deployment URL from secrets
         env:
           DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL || 'default_deploy_url' }}
