@@ -5,53 +5,55 @@
 
 With **GameLink**, users can build profiles that track their gaming achievements, high scores, trophies, and overall progress. Users can also link their accounts from popular platforms such as **Steam, PlayStation, and Xbox** for automated updates.  
 
-## Key Features  
+## Key Features
 
-- **User Profiles**:  
-  - Show gaming stats, achievements, favorite games, and current gameplay.  
+- **User Profiles:** Show gaming stats, achievements, favorite games, and current gameplay.  
 
-clean the readme up "- **Game Library**:   
-  - A searchable library where users can add games to their collection, including achievements and progress tracking.  
+- **Game Library:** A searchable library where users can add games to their collection, including achievements and progress tracking.  
 
-- **Integration with Game Platforms**:  
-  - Sync with APIs from platforms like **Steam, PlayStation Network, and Xbox Live** to fetch and display users' gaming data.  
+- **Integration with Game Platforms:** Sync with APIs from platforms like **Steam, PlayStation Network, and Xbox Live** to fetch and display users' gaming data.  
 
-- **Leaderboard**:  
-  - A **community leaderboard** for each game where users can compare scores with others.  
+- **Leaderboard:** A **community leaderboard** for each game where users can compare scores with others.  
 
-- **Social Features**:  
-  - Follow friends, send messages, and compare gaming stats.  
+- **Social Features:** Follow friends, send messages, and compare gaming stats.  
 
 ## Installation  
 
 1. Clone the repository:  
    
-sh
-   git clone https://github.com/your-username/game-profile-tracker.git
+```sh
+git clone git@github.com:hobbsm-code/game-link.git
+```
 
 2. Navigate to the project folder:
 
-  cd game-profile-tracker
+```
+cd game-link
+```
+1. Install dependencies:
 
-3. Install dependencies:
-  
- npm install
+```  
+npm install
+```
+1. Start the development server
 
-4. Start the development server
+```
+npm run dev
+```
 
-  npm run dev
+## Tech Stack
+- Frontend: React, Tailwind CSS
+- Backend: Node.js, Express.js
+- Database: MongoDB or PostgreSQL
+- APIs: Steam, PlayStation Network, Xbox Live
 
-Tech Stack
-Frontend: React, Tailwind CSS
-Backend: Node.js, Express.js
-Database: MongoDB or PostgreSQL
-APIs: Steam, PlayStation Network, Xbox Live
-Future Enhancements
-Mobile app support
-In-game overlay for live tracking
-AI-powered game recommendations
-Contributing
+## Future Enhancements
+- Mobile app support
+- In-game overlay for live tracking
+- AI-powered game recommendations
+
+## Contributing
 Contributions are welcome! Feel free to fork the repository and submit a pull request.
 
-License
-This project is licensed under the MIT License. "
+## License
+This project is licensed under the MIT License.
