@@ -3,7 +3,9 @@ name: Deploy
 
 # Trigger the workflow on push and pull request events to the release branch
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - release
 
