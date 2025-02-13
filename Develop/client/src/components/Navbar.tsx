@@ -24,34 +24,37 @@ const AppNavbar = () => {
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
+          <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank" rel="noopener noreferrer">
+            Enable CORS for your browser
+          </a>
           <Navbar.Brand as={Link} to='/'>
-            
+
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-            <Dropdown>
-            <Dropdown.Toggle variant="light" id="navbar-dropdown">
-            Menu
-            </Dropdown.Toggle>
-            
-            <Dropdown.Menu>
-              <Dropdown.Item as={Link} to='/'>Search For Games</Dropdown.Item>
-              {Auth.loggedIn() ? (<>
-              <Dropdown.Item as={Link} to='/saved'>See Your Games</Dropdown.Item>
-              <Dropdown.Item as={Link} to='/leaderboard'>Leaderboard</Dropdown.Item>
-              
-              </>) : null }
-              
-              
-              
-            </Dropdown.Menu>
-          </Dropdown>
+              <Dropdown>
+                <Dropdown.Toggle variant="light" id="navbar-dropdown">
+                  Menu
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to='/'>Search For Games</Dropdown.Item>
+                  {Auth.loggedIn() ? (<>
+                    <Dropdown.Item as={Link} to='/saved'>See Your Games</Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/leaderboard'>Leaderboard</Dropdown.Item>
+
+                  </>) : null}
+
+
+
+                </Dropdown.Menu>
+              </Dropdown>
 
               {/* <Nav.Link as={Link} to='/'>
                 Search For Games
               </Nav.Link> */}
-              
+
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link disabled>Welcome {user.username}!</Nav.Link>
