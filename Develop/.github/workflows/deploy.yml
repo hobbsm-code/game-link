@@ -1,0 +1,32 @@
+# Name of the GitHub Actions workflow
+name: Deploy
+
+# Trigger the workflow on push and pull request events to the release branch
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - release
+
+jobs:
+  # Define a job named "ci"
+  render-deploy:
+    # Specify the operating system to run the job on
+    runs-on: ubuntu-latest
+    
+    # Define the steps to be executed in the job
+    steps:
+      # Checkout the code from the repository
+      - uses: actions/checkout@v3
+
+      # Define a step named "Deploy"
+      - name: Deploy
+        # Only run this step if the branch is main
+        if: github.event.pull_request.merged == true
+        # Set an environment variable with the deployment URL from secrets
+        env:
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL || 'default_deploy_url' }}
+        # Run the deployment command
+        run: |
+          curl "$DEPLOY_URL"

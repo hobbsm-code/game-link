@@ -1,17 +1,303 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Rubik+Mono+One&display=swap');
+
+/* General Styles */
 body {
-  font-family: 'Rubik', sans-serif;
+    font-family: 'Rubik', sans-serif;
+    background: url('./src/assets/img/background2.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    margin: 0;
+    padding: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Rubik+Mono+One&display=swap');
+
+/* General Styles */
+.form-container {
+    font-family: 'Rubik', sans-serif;
+    background:url('./src/assets/img/background2.jpg') no-repeat center fixed;
+    background-size: cover;
+    text-align: center;
+    justify-content: center;
+      border: 2px solid #00FFFF;
+      padding: 5px;
+      text-align: center;
+      border-radius: 1px;
+      width: 60%;
+      margin: 50px auto;
+  }
+
+
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Rubik Mono One', sans-serif;
+    background-color: transparent;
 }
 
+/* Small Font Styling */
 .small {
-  font-weight: 300;
-  font-style: italic;
+    font-weight: 300;
+    font-style: italic;
+}
+
+
+/* Landing Page Background */
+.landing-page {
+  background: url('../assets/landing-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  text-align: center;
+  padding: 100px 20px;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-self: start;
+  
+  padding: 15px 20px;
+  background-color: #111;
+  border-bottom: 2px solid #00FFFF;
+  align-items: bottom;
+}
+.mb-5, .pt-5 {
+  font-size: 50px;
+  color: #00FFFF;
+  text-shadow: 0 0 10px #141414;
+  
+}
+.pt-5 h2{
+text-align: center;
+
+}
+
+.logo h1, .mb-5 h2 {
+  font-size: 50px;
+  color: #00FFFF;
+  text-shadow: 0 0 10px #00FFFF;
+}
+
+/* Login/Register Buttons */
+.login-buttons button {
+  margin-left: 10px;
+}
+
+/* Welcome Message */
+.welcome-message {
+  font-size: 22px;
+  text-shadow: 0 0 10px #00FFFF;
+  margin-bottom: 30px;
+ 
+}
+
+/* Search Section */
+.container {
+  margin-top: 20px;
+  background-color: transparent;
+  text-size-adjust: 12px;
+}
+
+.Form{
+  padding: 10px;
+  font-size: 12px;
+  width: 350px;
+  background-color: transparent;
+  color: #0a0a0a;
+  border: 2px solid #00FFFF;
+  text-align: center;
+ 
+}
+
+.search-btn {
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color: #00FFFF;
+  color: #000;
+  border: 2px solid #00FFFF;
+}
+/* Main Page Background */
+/* Sidebar for Favorite Games */
+.favorite-games {
+  width: 250px;
+  background-color: #111;
+  border: 2px solid #00FF00;
+  padding: 20px;
+  position: absolute;
+  left: 20px;
+  top: 100px;
+}
+
+/* Leaderboard Box */
+.leaderboard {
+  width: 300px;
+  background-color: #111;
+  border: 2px solid #00FFFF;
+  padding: 15px;
+  text-align: center;
+  color: #000;
+  margin: auto;
+}
+
+/* Video Game Collection Button */
+.collection-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 12px;
+  background-color: #00FFFF;
+  color: #000;
+  border: 2px solid #00FFFF;
+  text-align: center;
+}
+/* Collection Page Background */
+.collection-page {
+  background: url('../assets/collection-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  padding: 50px 20px;
+}
+
+/* Collection Title */
+.collection-title h2 {
+  font-size: 36px;
+  color: #fff;
+  text-shadow: 0 0 10px #00FFFF;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #00FFFF;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Game Image Grid */
+.game-images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.game-box {
+  width: 220px;
+  background-color: #111;
+  border: 2px solid #00FFFF;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-box img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 2px solid #00FF00;
+}
+
+/* Game Buttons */
+.game-btn {
+  margin-top: 10px;
+  background-color: #00FFFF;
+  color: #000;
+  border: 2px solid #00FFFF;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.game-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00FFFF;
+}
+
+.game-box:hover .game-btn {
+  background-color: #00FF00;
+  color: #000;
+}
+
+/* Social Media Handles */
+.social-media-handles {
+  background-color: #111;
+  border: 2px solid #00FFFF;
+  padding: 20px;
+  margin-top: 30px;
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  text-shadow: 0 0 5px #00FFFF;
+  margin-left: 10px;
+}
+
+.social-media-handles p {
+  margin: 0;
+  color: #fff;
+  margin-left: 10px;
+}
+footer {
+
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
+}
+.pt-5 h2{
+  background-color: transparent;
+}
+.form-select {
+  background: rgba(0, 0, 0, 0.8); /* Transparent black */;
+  color: #00FF00;
+  border: 2px solid #00FFFF;
+  padding: 12px;
+  font-size: 18px;
+}
+
+.form-select:focus {
+  box-shadow: 0 0 5px #00FFFF;
+  border-color: #00FF00;
+}
+/* 🔹 Buttons */
+button {
+  background: transparent;
+  border: 2px solid #00FFFF;
+  color: #00FFFF;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #00FFFF;
+  color: #000;
+  box-shadow: 0 0 10px #00FFFF;
+}
+
+/* 🔹 Game Cards */
+.card {
+  background: #111;
+  border: 2px solid #00FFFF;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00FFFF;
+}
+
+.card-title a {
+  color: #00FFFF;
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  color: #00FF00;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px), (max-hieght: 768px) {
+  .form-container {
+      width: 90%;
+  }
 }

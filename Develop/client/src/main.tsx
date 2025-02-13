@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
 import SearchGames from './pages/SearchGames.js'
 import SavedGames from './pages/SavedGames.js'
+import Leaderboard from './components/Leaderboard.js'
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
       }, {
         path: '/saved',
         element: <SavedGames />
-      }
+      },
+      {
+        path: '/leaderboard',
+        element: <Leaderboard />
+      },
     ]
   }
 ])

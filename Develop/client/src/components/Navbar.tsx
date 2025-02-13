@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
+import { Navbar, Nav, Container, Modal, Tab, Dropdown } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+
 
 import Auth from '../utils/auth';
 
@@ -24,24 +25,37 @@ const AppNavbar = () => {
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            GameLink
+            
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              <Nav.Link as={Link} to='/'>
+            <Dropdown>
+            <Dropdown.Toggle variant="light" id="navbar-dropdown">
+            Menu
+            </Dropdown.Toggle>
+            
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to='/'>Search For Games</Dropdown.Item>
+              {Auth.loggedIn() ? (<>
+              <Dropdown.Item as={Link} to='/saved'>See Your Games</Dropdown.Item>
+              <Dropdown.Item as={Link} to='/leaderboard'>Leaderboard</Dropdown.Item>
+              
+              </>) : null }
+              
+              
+              
+            </Dropdown.Menu>
+          </Dropdown>
+
+              {/* <Nav.Link as={Link} to='/'>
                 Search For Games
-              </Nav.Link>
-              {/* if user is logged in show saved game and logout */}
+              </Nav.Link> */}
+              
               {Auth.loggedIn() ? (
                 <>
-                  <Nav.Link as={Link} to='/saved'>
-                    See Your Games
-                  </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
-                  {/* Display the logged-in username */}
                   <Nav.Link disabled>Welcome {user.username}!</Nav.Link>
-
+                  <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>

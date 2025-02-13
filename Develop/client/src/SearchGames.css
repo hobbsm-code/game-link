@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&family=Rubik+Mono+One&display=swap');
+
+body {
+    background-color: #000;
+    color: #00FF00;
+    font-family: 'Rubik', sans-serif;
+}
+
+/* 🔹 Form Container */
+.form-container {
+    background: rgba(0, 0, 0, 0.8); /* Transparent black */
+    border: 2px solid #00FFFF;
+    padding: 30px;
+    text-align: center;
+    border-radius: 10px;
+    width: 60%;
+    margin: 50px auto;
+}
+
+/* 🔹 Headings */
+h1, h2 {
+    font-family: 'Rubik Mono One', sans-serif;
+    color: #00FFFF;
+    text-shadow: 0 0 5px #00FFFF;
+}
+
+/* 🔹 Select Dropdown */
+.form-select {
+    background: transparent;
+    color: #00FF00;
+    border: 2px solid #00FFFF;
+    padding: 12px;
+    font-size: 18px;
+}
+
+.form-select:focus {
+    box-shadow: 0 0 10px #00FFFF;
+    border-color: #00FF00;
+}
+
+/* 🔹 Buttons */
+button {
+    background: transparent;
+    border: 2px solid #00FFFF;
+    color: #00FFFF;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #00FFFF;
+    color: #000;
+    box-shadow: 0 0 10px #00FFFF;
+}
+
+/* 🔹 Game Cards */
+.card {
+    background: #111;
+    border: 2px solid #00FFFF;
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00FFFF;
+}
+
+.card-title a {
+    color: #00FFFF;
+    text-decoration: none;
+}
+
+.card-title a:hover {
+    color: #00FF00;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        width: 90%;
+    }
+}

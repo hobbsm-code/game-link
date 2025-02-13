@@ -53,7 +53,7 @@ export const REMOVE_GAME = gql`
       username
       email
       savedGames {
-        id
+        gameId
         title
         short_description
         thumbnail
@@ -65,3 +65,13 @@ export const REMOVE_GAME = gql`
     }
   }
 `;
+
+export const SUBMIT_PLAYTIME = gql`
+  mutation submitPlaytime($gameId: ID!, $hours: Float!) {
+    submitPlaytime(gameId: $gameId, hours: $hours) {
+      gameId
+      time_played
+    }
+  }
+`;
+
