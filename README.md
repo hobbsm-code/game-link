@@ -41,6 +41,8 @@ npm install
 npm run dev
 ```
 
+NOTE: In order to connect to the Games API, you must click the Enable CORS in your browser link and request temoporary access
+
 ## Tech Stack
 - Frontend: React, Tailwind CSS
 - Backend: Node.js, Express.js
