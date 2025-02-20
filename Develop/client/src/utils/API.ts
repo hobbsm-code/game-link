@@ -56,7 +56,7 @@ export const deleteGame = (gameId: string, token: string) => {
 
 
 export const searchGameAPI = (category?: string) => {
-  return fetch(`https://www.freetogame.com/api/games${category ? `?category=${(category)}` : ''}` 
+  return fetch(`/api/games${category ? `?category=${(category)}` : ''}` 
     ,{
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
@@ -65,13 +65,5 @@ export const searchGameAPI = (category?: string) => {
 
 
 
-// const response = await fetch(`https://www.freetogame.com/api/games?category=${req.query.category}`, {
-//   method: 'GET',
-//   headers: { 'Content-Type': 'application/json' }
-// });
-// if (!response.ok) {
-//   throw new Error(`Failed to fetch from freetogame: ${response.status}`);
-// }
-// const data = await response.json();
-// res.json(data);
+
 
