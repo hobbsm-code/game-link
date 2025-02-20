@@ -88,7 +88,7 @@ export const resolvers = {
             return leaderboard.slice(0, 10);
         },
 
-        getFreeGames: async ({category}: { category: string }) => {
+        getFreeGames: async (_parent:any, {category}: { category: string }) => {
             try {
                 if (!category) {
                     throw new Error('Category is required');
@@ -99,6 +99,7 @@ export const resolvers = {
                     throw new Error(`Failed to fetch games: ${response.status}`);}
                 const data = await response.json();
                 
+                console.log('Fetched data:', data);
 
                 return data.map ((game: any) => {
                     return {
