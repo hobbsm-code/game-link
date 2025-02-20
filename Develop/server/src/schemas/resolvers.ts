@@ -100,7 +100,6 @@ export const resolvers = {
                     throw new Error(`Failed to fetch games: ${response.status}`);}
                 const data = await response.json();
                 
-                console.log('Fetched data:', data);
 
                 return data.map ((game: any) => {
                     return {
