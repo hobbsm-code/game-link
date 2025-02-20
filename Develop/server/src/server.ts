@@ -69,35 +69,6 @@ app.use(cors({
   // });
 
 
-  app.get('/api/games', async (req: Request, res: Response) => {
-    const category = req.query.category as string;
-  
-    if (!category) {
-      return res.status(400).json({ error: 'Category query parameter is required' });
-    }
-  
-    try {
-      const response = await fetch(`https://www.freetogame.com/api/games?category=${category}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-      });
-  
-      if (!response.ok) {
-        throw new Error(`External API error: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      res.json(data); // Send data to frontend
-      return data;
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error fetching data from FreeToGame API' });
-    }
-  
-  });
-  
-  
-
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);

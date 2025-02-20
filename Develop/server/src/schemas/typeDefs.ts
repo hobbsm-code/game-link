@@ -65,6 +65,7 @@ const typeDefs = `#graphql
     type Query {
         me: User
         getLeaderboard: [LeaderboardEntry]
+        getFreeGames: [Game]
     }
 
     type Mutation {

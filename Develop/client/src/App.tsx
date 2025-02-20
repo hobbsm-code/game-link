@@ -9,10 +9,12 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
-// Construct our main GraphQL API endpoint
+// Construct our main GraphQL API endpoint for graphql and API requests
+
 const httpLink = createHttpLink({
   // uri: 'http://localhost:3001/graphql',
   uri: 'https://game-link-backend.onrender.com/graphql',
+
   credentials: 'include',
 });
 

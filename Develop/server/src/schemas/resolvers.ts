@@ -86,6 +86,36 @@ export const resolvers = {
         
             // Return top 10 players
             return leaderboard.slice(0, 10);
+        },
+        getFreeGames: async (_:any, {category}: { category: string }) => {
+            try {
+                const response = await fetch(`https://www.freetogame.com/api/games?category=${category}`);
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch games: ${response.statusText}`);}
+                const data = await response.json();
+                return data.map ((game: any) => {
+                    const { id, title, short_description, game_url, genre, platform, publisher, developer, release_date, freetogame_profile_url, thumbnail, category } = game;
+                    return {
+                        gameId: id,
+                        title,
+                        short_description,
+                        game_url,
+                        genre,
+                        platform,
+                        publisher,
+                        developer,
+                        release_date,
+                        freetogame_profile_url,
+                        thumbnail,
+                        category
+                    };
+                });
+            }
+            
+            catch (error) {
+                console.error(error);
+                throw new Error('Error fetching games');
+            }
         }
         
 

@@ -32,3 +32,23 @@ export const GET_LEADERBOARD = gql`
     }
   }
 `;
+
+export const GET_FREE_GAMES = gql`
+  query getFreeGames {
+    getFreeGames {
+      gameId
+      title
+      short_description
+      thumbnail
+      genre
+      game_url
+      freetogame_profile_url
+      platform
+      publisher
+      developer
+      release_date
+      category
+      time_played
+    }
+  }
+`;

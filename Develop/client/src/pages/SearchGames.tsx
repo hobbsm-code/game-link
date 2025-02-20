@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import type { FormEvent } from 'react';
 
 import {
@@ -13,7 +13,8 @@ import {
 
 import Auth from '../utils/auth';
 
-import { searchGameAPI } from '../utils/API';
+
+import { GET_FREE_GAMES } from '../utils/queries';
 import { SAVE_GAME } from '../utils/mutations';
 import {  getSavedGameIds } from '../utils/localStorage';
 import type { Game } from '../models/Game';
@@ -26,6 +27,7 @@ const SearchGames = () => {
 
   const [saveGame] = useMutation(SAVE_GAME);
 
+  const [getFreeGames, { loading, data, error }] = useLazyQuery(GET_FREE_GAMES);
   
   const categories = [
     "mmorpg", "shooter", "strategy", "moba", "racing", "sports", "social", "sandbox",
@@ -46,37 +48,25 @@ const SearchGames = () => {
 
     try {
       
-       let category = encodeURIComponent(searchInput.trim());
-
-      const response = await searchGameAPI(category);
-      console.log({response});
-      
-      
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const  items  = await response.json();
-      console.log({items});
-      
-
-      const gameData = items.map((game: Game) => ({
-        gameId: game.id,
-        publisher: game.publisher || ['No publisher to display'],
-        title: game.title,
-        short_description: game.short_description,
-        thumbnail: game.thumbnail,
-        freetogame_profile_url: game.freetogame_profile_url,
-        category: game.genre,
-      }));
-
-      setSearchedGames(gameData);
-     
-      // setSearchInput('');
-    } catch (err) {
+       getFreeGames({
+        variables: { category: searchInput.trim() } });
+       } catch (err) {  
       console.error(err);
-    }
-  };
+       }
+     
+       if (data && data.getFreeGames && searchedGames.length === 0) {
+        const gameData = data.getFreeGames.map((game: Game) => ({
+          gameId: game.id,
+          publisher: game.publisher || 'No publisher to display',
+          title: game.title,
+          short_description: game.short_description,
+          thumbnail: game.thumbnail,
+          freetogame_profile_url: game.freetogame_profile_url,
+          category: game.genre,
+        }));
+    
+        setSearchedGames(gameData);
+      }
 
   // create function to handle saving a game to our database
   const handleSaveGame = async (gameId: string) => {
@@ -138,12 +128,14 @@ const SearchGames = () => {
 
       <Container>
         <h2 className='pt-5'>
-          {searchedGames.length
+          {loading? 'Loading....':searchedGames.length
             ? `Viewing ${searchedGames.length} results
             `
             : 'Search for a game to begin'}
         </h2>
          
+        {error && <p>Error fetching games: {error.message}</p>}
+
         <Row>
           {searchedGames.map((game) => {
             return (
@@ -180,7 +172,8 @@ const SearchGames = () => {
       </Container>
     </>
   );
-};
+}
+}
 
 export default SearchGames;
 
