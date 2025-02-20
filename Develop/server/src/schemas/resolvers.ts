@@ -88,8 +88,9 @@ export const resolvers = {
             return leaderboard.slice(0, 10);
         },
 
-        getFreeGames: async (_parent:any, {category}: { category: string }) => {
+        getFreeGames: async (_parent:any, args:{category:string} ) => {
             try {
+                const  category  = args?.category;
                 if (!category) {
                     throw new Error('Category is required');
                   }

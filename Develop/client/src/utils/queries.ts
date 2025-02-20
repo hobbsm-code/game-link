@@ -34,21 +34,15 @@ export const GET_LEADERBOARD = gql`
 `;
 
 export const GET_FREE_GAMES = gql`
-  query getFreeGames {
-    getFreeGames {
+  query getFreeGames ($category: String!) {
+    getFreeGames (category: $category)  {
       gameId
       title
-      short_description
       thumbnail
+      short_description
       genre
-      game_url
-      freetogame_profile_url
-      platform
       publisher
-      developer
-      release_date
-      category
-      time_played
+      freetogame_profile_url
     }
   }
 `;
