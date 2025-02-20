@@ -87,38 +87,45 @@ export const resolvers = {
             // Return top 10 players
             return leaderboard.slice(0, 10);
         },
-        getFreeGames: async (_:any, {category}: { category: string }) => {
+
+        getFreeGames: async ({category}: { category: string }) => {
             try {
+                if (!category) {
+                    throw new Error('Category is required');
+                  }
+                //   call external API
                 const response = await fetch(`https://www.freetogame.com/api/games?category=${category}`);
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch games: ${response.statusText}`);}
+                    throw new Error(`Failed to fetch games: ${response.status}`);}
                 const data = await response.json();
+                
+
                 return data.map ((game: any) => {
-                    const { id, title, short_description, game_url, genre, platform, publisher, developer, release_date, freetogame_profile_url, thumbnail, category } = game;
                     return {
-                        gameId: id,
-                        title,
-                        short_description,
-                        game_url,
-                        genre,
-                        platform,
-                        publisher,
-                        developer,
-                        release_date,
-                        freetogame_profile_url,
-                        thumbnail,
-                        category
+                        gameId: game.id,
+                        title: game.title,
+                        short_description: game.short_description,
+                        game_url: game.game_url,
+                        genre: game.genre,
+                        platform: game.platform,
+                        publisher: game.publisher,
+                        developer: game.developer,
+                        release_date: game.release_date,
+                        freetogame_profile_url: game.freetogame_profile_url,
+                        id: game.id,
+                        thumbnail: game.thumbnail,
+                        category: game.category,
+                        time_played: game.time_played,
                     };
-                });
-            }
+                    }
+                );
+                }
             
             catch (error) {
                 console.error(error);
                 throw new Error('Error fetching games');
             }
         }
-        
-
     },
 
 
