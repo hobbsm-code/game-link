@@ -55,13 +55,13 @@ export const deleteGame = (gameId: string, token: string) => {
 
 
 
-export const searchGameAPI = (category?: string) => {
-  return fetch(`/api/games${category ? `?category=${(category)}` : ''}` 
-    ,{
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  });
-};
+// export const searchGameAPI = (category?: string) => {
+//   return fetch(`/api/games${category ? `?category=${(category)}` : ''}` 
+//     ,{
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//   });
+// };
 
 
 

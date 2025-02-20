@@ -67,6 +67,8 @@ const SearchGames = () => {
     
         setSearchedGames(gameData);
       }
+    }
+
 
   // create function to handle saving a game to our database
   const handleSaveGame = async (gameId: string) => {
@@ -173,7 +175,7 @@ const SearchGames = () => {
     </>
   );
 }
-}
+
 
 export default SearchGames;
 
