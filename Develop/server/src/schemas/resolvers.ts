@@ -100,7 +100,7 @@ export const resolvers = {
                 if (!response.ok) {
                     throw new Error(`Failed to fetch games: ${response.status}`);}
                 const data = await response.json();
-                
+                console.log("🎮 Raw API Response:", data);
 
                 return data.map ((game: any) => {
                     return {
