@@ -68,52 +68,100 @@ const SearchGames = () => {
     setSelectedCategory(searchInput);
   };
 
-
-
+  const handleSaveGame = async (gameId: string) => {
+    if (!gameId) {
+      console.error("❌ Invalid gameId:", gameId);
+      return false;
+    }
   
-  const handleSaveGame = async (title: string) => {
-    
     const gameToSave: Game | undefined = searchedGames.find(
-      (game) => game.title === title
+      (game) => game.gameId === gameId
     );
   
     if (!gameToSave) {
-      console.error("Game not found in searchedGames:", title);
+      console.error("❌ Game not found in searchedGames:", gameId);
       return false;
     }
   
-    // get token
+    // Get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
   
     if (!token) {
-      console.error("User not authenticated");
+      console.error("❌ User not authenticated");
       return false;
     }
   
-    console.log("Game input for mutation:", gameToSave);
+    console.log("✅ Game input for mutation:", gameToSave);
   
     try {
-      await saveGame({
-        variables: { input: 
-          { ...gameToSave, 
-            gameId: gameToSave.gameId,
+      const { data } = await saveGame({
+        variables: {
+          input: {
+            gameId: gameToSave.gameId?.toString(),
             title: gameToSave.title,
             short_description: gameToSave.short_description,
-            thumbnail: gameToSave.thumbnail,
-            freetogame_profile_url: gameToSave.freetogame_profile_url,
-            platform: gameToSave.platform,
-            genre: gameToSave.genre,
+            game_url: gameToSave.freetogame_profile_url,
+            genre: gameToSave.category,
             publisher: gameToSave.publisher,
-          
-          } }
+            thumbnail: gameToSave.thumbnail,
+          },
+        },
       });
-      console.log("Game saved:", gameToSave.gameId, gameToSave.id);
   
-      setSavedGameIds([...savedGameIds, gameToSave.gameId]);
+      if (data) {
+        setSavedGameIds([...savedGameIds, gameId]);
+        console.log("✅ Game saved successfully!");
+      }
     } catch (err) {
-      console.error("Error saving game:", err);
+      console.error("❌ Error saving game:", err);
     }
   };
+  
+
+  
+  // const handleSaveGame = async (gameId: string) => {
+    
+  //   const gameToSave: Game | undefined = searchedGames.find(
+  //     (game) => game.gameId === gameId
+  //   );
+  
+  //   if (!gameToSave) {
+  //     console.error("Game not found in searchedGames:", gameId);
+  //     return false;
+  //   }
+  
+  //   // get token
+  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
+  
+  //   if (!token) {
+  //     console.error("User not authenticated");
+  //     return false;
+  //   }
+  
+  //   console.log("Game input for mutation:", gameToSave);
+  
+  //   try {
+  //     await saveGame({
+  //       variables: { input: 
+  //         { ...gameToSave, 
+  //           gameId: gameToSave.gameId,
+  //           title: gameToSave.title,
+  //           short_description: gameToSave.short_description,
+  //           thumbnail: gameToSave.thumbnail,
+  //           freetogame_profile_url: gameToSave.freetogame_profile_url,
+  //           platform: gameToSave.platform,
+  //           genre: gameToSave.genre,
+  //           publisher: gameToSave.publisher,
+          
+  //         } }
+  //     });
+  //     console.log("Game saved:", gameToSave.gameId, gameToSave.id)
+  
+  //     setSavedGameIds([...savedGameIds, gameToSave.gameId]);
+  //   } catch (err) {
+  //     console.error("Error saving game:", err);
+  //   }
+  // };
 
   return (
     <>
@@ -180,7 +228,7 @@ const SearchGames = () => {
                       <Button
                         disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game.title)}>
+                        onClick={() => handleSaveGame(game.gameId)}>
                         {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
