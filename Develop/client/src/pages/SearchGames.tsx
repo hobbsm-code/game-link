@@ -33,7 +33,8 @@ const SearchGames = () => {
     onCompleted: (data) => {
       if (data && data.getFreeGames) {
         const gameData = data.getFreeGames.map((game: Game) => ({
-          gameId: game.id,
+          gameId: game.id? game.id.toString(): undefined,
+          id: game.id? game.id.toString(): undefined,
           publisher: game.publisher || 'No publisher to display',
           title: game.title,
           short_description: game.short_description,
@@ -93,7 +94,18 @@ const SearchGames = () => {
   
     try {
       await saveGame({
-        variables: { input: { ...gameToSave, gameId: gameToSave.gameId?.toString() } }
+        variables: { input: 
+          { ...gameToSave, 
+            gameId: gameToSave.gameId,
+            title: gameToSave.title,
+            short_description: gameToSave.short_description,
+            thumbnail: gameToSave.thumbnail,
+            freetogame_profile_url: gameToSave.freetogame_profile_url,
+            platform: gameToSave.platform,
+            genre: gameToSave.genre,
+            publisher: gameToSave.publisher,
+          
+          } }
       });
   
       setSavedGameIds([...savedGameIds, gameToSave.gameId]);

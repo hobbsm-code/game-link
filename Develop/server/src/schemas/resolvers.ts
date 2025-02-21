@@ -114,6 +114,8 @@ export const resolvers = {
                         developer: game.developer,
                         release_date: game.release_date,
                         freetogame_profile_url: game.freetogame_profile_url,
+                        id: game.id,
+                        publisher: game.publisher,
                     };
                     }
                 );
