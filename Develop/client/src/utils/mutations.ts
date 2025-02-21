@@ -33,7 +33,7 @@ export const SAVE_GAME = gql`
       username
       email
       savedGames {
-        id
+        gameId
         title
         short_description
         thumbnail
