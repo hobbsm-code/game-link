@@ -107,6 +107,7 @@ const SearchGames = () => {
           
           } }
       });
+      console.log("Game saved:", gameToSave.gameId, gameToSave.id);
   
       setSavedGameIds([...savedGameIds, gameToSave.gameId]);
     } catch (err) {
