@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useMutation, useLazyQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import type { FormEvent } from 'react';
 
 import {
@@ -24,10 +24,27 @@ const SearchGames = () => {
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
   const [searchInput, setSearchInput] = useState('');
   const [savedGameIds, setSavedGameIds] = useState(getSavedGameIds());
-
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [saveGame] = useMutation(SAVE_GAME);
 
-  const [getFreeGames, { loading, data, error }] = useLazyQuery(GET_FREE_GAMES);
+  const { loading, error } = useQuery(GET_FREE_GAMES, {
+    variables: { category: selectedCategory },
+    skip: !selectedCategory, // Skip query until a category is selected
+    onCompleted: (data) => {
+      if (data && data.getFreeGames) {
+        const gameData = data.getFreeGames.map((game: Game) => ({
+          gameId: game.id,
+          publisher: game.publisher || 'No publisher to display',
+          title: game.title,
+          short_description: game.short_description,
+          thumbnail: game.thumbnail,
+          freetogame_profile_url: game.freetogame_profile_url,
+          category: game.genre,
+        }));
+        setSearchedGames(gameData);
+      }
+    }
+  });
   
   const categories = [
     "mmorpg", "shooter", "strategy", "moba", "racing", "sports", "social", "sandbox",
@@ -46,28 +63,9 @@ const SearchGames = () => {
       return false;
     }
 
-    try {
-      
-       getFreeGames({
-        variables: { category: searchInput.trim() } });
-       } catch (err) {  
-      console.error(err);
-       }
-     
-       if (data && data.getFreeGames && searchedGames.length === 0) {
-        const gameData = data.getFreeGames.map((game: Game) => ({
-          gameId: game.id,
-          publisher: game.publisher || 'No publisher to display',
-          title: game.title,
-          short_description: game.short_description,
-          thumbnail: game.thumbnail,
-          freetogame_profile_url: game.freetogame_profile_url,
-          category: game.genre,
-        }));
-    
-        setSearchedGames(gameData);
-      }
-    }
+    setSelectedCategory(searchInput);
+  };
+
 
 
   // create function to handle saving a game to our database

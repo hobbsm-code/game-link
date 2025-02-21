@@ -9,16 +9,14 @@ import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
-// Construct our main GraphQL API endpoint for graphql and API requests
-
 const httpLink = createHttpLink({
-  // uri: 'http://localhost:3001/graphql',
+  
   uri: 'https://game-link-backend.onrender.com/graphql',
 
   credentials: 'include',
 });
 
-// Construct request middleware that will attach the JWT token to every request as an `authorization` header
+
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
