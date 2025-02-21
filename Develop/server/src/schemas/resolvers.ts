@@ -104,7 +104,7 @@ export const resolvers = {
 
                 return data.map ((game: any) => {
                     return {
-                        gameId: game.id,
+                        gameId: game.id? game.id.toString() : undefined,
                         title: game.title,
                         thumbnail: game.thumbnail,
                         short_description: game.short_description,
@@ -114,7 +114,7 @@ export const resolvers = {
                         developer: game.developer,
                         release_date: game.release_date,
                         freetogame_profile_url: game.freetogame_profile_url,
-                        id: game.id,
+                        id: game.id? game.id : undefined,
                         publisher: game.publisher,
                     };
                     }
@@ -163,6 +163,10 @@ export const resolvers = {
             }
         },
         saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
+            if (!input.gameId) {
+                console.error("❌ gameId is missing, cannot save game:", input);
+                throw new Error("Game ID is required to save the game.");
+            }
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
