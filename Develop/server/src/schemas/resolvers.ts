@@ -113,7 +113,6 @@ export const resolvers = {
                         developer: game.developer,
                         release_date: game.release_date,
                         freetogame_profile_url: game.freetogame_profile_url,
-                        id: game.id,
                         thumbnail: game.thumbnail,
                         category: game.category,
                         time_played: game.time_played,
