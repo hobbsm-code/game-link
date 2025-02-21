@@ -73,7 +73,7 @@ const SearchGames = () => {
   const handleSaveGame = async (gameId: string) => {
     
     const gameToSave: Game | undefined = searchedGames.find(
-      (game) => game.gameId === gameId.toString()
+      (game) => game.gameId === gameId
     );
   
     if (!gameToSave) {
