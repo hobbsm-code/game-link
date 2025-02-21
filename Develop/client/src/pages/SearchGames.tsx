@@ -33,7 +33,7 @@ const SearchGames = () => {
     onCompleted: (data) => {
       if (data && data.getFreeGames) {
         const gameData = data.getFreeGames.map((game: Game) => ({
-          id: game.id?.toString(),
+          gameId: game.id,
           publisher: game.publisher || 'No publisher to display',
           title: game.title,
           short_description: game.short_description,
