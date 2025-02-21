@@ -1,7 +1,7 @@
 
 const typeDefs = `#graphql
     input GameInput {
-        gameId: ID
+        gameId: ID!
         title: String
         short_description: String
         game_url: String
@@ -25,7 +25,7 @@ const typeDefs = `#graphql
     }
 
     type Game {
-        gameId: ID
+        gameId: ID!
         title: String
         short_description: String
         game_url: String
@@ -40,7 +40,7 @@ const typeDefs = `#graphql
     }
 
     type User {
-        _id: ID
+        _id: ID!
         username: String
         email: String
         gameCount: Int

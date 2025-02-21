@@ -163,7 +163,7 @@ export const resolvers = {
             }
         },
         saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
-            if (!input.title) {
+            if (!input.gameId) {
                 console.error("❌ title is missing, cannot save game:", input);
                 throw new Error("Game ID is required to save the game.");
             }
