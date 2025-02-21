@@ -103,7 +103,7 @@ export const resolvers = {
 
                 return data.map ((game: any) => {
                     return {
-                        gameId: game.id,
+                        id: game.id,
                         title: game.title,
                         short_description: game.short_description,
                         game_url: game.game_url,
