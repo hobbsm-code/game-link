@@ -71,14 +71,14 @@ const SearchGames = () => {
 
 
   
-  const handleSaveGame = async (gameId: string) => {
+  const handleSaveGame = async (title: string) => {
     
     const gameToSave: Game | undefined = searchedGames.find(
-      (game) => game.gameId === gameId
+      (game) => game.title === title
     );
   
     if (!gameToSave) {
-      console.error("Game not found in searchedGames:", gameId);
+      console.error("Game not found in searchedGames:", title);
       return false;
     }
   
@@ -180,7 +180,7 @@ const SearchGames = () => {
                       <Button
                         disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game.gameId)}>
+                        onClick={() => handleSaveGame(game.title)}>
                         {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
