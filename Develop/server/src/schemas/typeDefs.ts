@@ -1,7 +1,7 @@
 
 const typeDefs = `#graphql
     input GameInput {
-        gameId: ID!
+        gameId: ID
         title: String
         short_description: String
         game_url: String
@@ -35,9 +35,7 @@ const typeDefs = `#graphql
         developer: String
         release_date: String
         freetogame_profile_url: String
-        id: Int
         thumbnail: String
-        category: String
         time_played: Float
     }
 

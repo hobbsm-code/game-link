@@ -41,6 +41,7 @@ const SearchGames = () => {
           freetogame_profile_url: game.freetogame_profile_url,
           category: game.genre,
         }));
+        console.log("Game data:", gameData);
         setSearchedGames(gameData);
       }
     }
@@ -70,9 +71,7 @@ const SearchGames = () => {
 
   
   const handleSaveGame = async (gameId: string) => {
-    console.log("Searched Games Array:", searchedGames);
-    console.log("Looking for gameId:", gameId);
-
+    
     const gameToSave: Game | undefined = searchedGames.find(
       (game) => game.gameId?.toString() === gameId.toString()
     );

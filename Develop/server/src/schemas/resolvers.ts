@@ -100,11 +100,11 @@ export const resolvers = {
                 if (!response.ok) {
                     throw new Error(`Failed to fetch games: ${response.status}`);}
                 const data = await response.json();
-                console.log(data);
+                
 
                 return data.map ((game: any) => {
                     return {
-                        id: game.id,
+                        gameId: game.id,
                         title: game.title,
                         thumbnail: game.thumbnail,
                         short_description: game.short_description,
