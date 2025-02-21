@@ -104,7 +104,7 @@ export const resolvers = {
 
                 return data.map ((game: any) => {
                     return {
-                        gameId: game.id? game.id.toString() : undefined,
+                        gameId: String(game.id),
                         title: game.title,
                         thumbnail: game.thumbnail,
                         short_description: game.short_description,

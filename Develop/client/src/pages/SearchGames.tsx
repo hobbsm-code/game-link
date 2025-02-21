@@ -68,100 +68,25 @@ const SearchGames = () => {
     setSelectedCategory(searchInput);
   };
 
-  const handleSaveGame = async (gameId: string) => {
-    if (!gameId) {
-      console.error("❌ Invalid gameId:", gameId);
+const handleSaveGame = async (game: Game) => {
+    if (!Auth.loggedIn()) {
       return false;
     }
-  
-    const gameToSave: Game | undefined = searchedGames.find(
-      (game) => game.gameId === gameId
-    );
-  
-    if (!gameToSave) {
-      console.error("❌ Game not found in searchedGames:", gameId);
-      return false;
-    }
-  
-    // Get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-  
-    if (!token) {
-      console.error("❌ User not authenticated");
-      return false;
-    }
-  
-    console.log("✅ Game input for mutation:", gameToSave);
-  
-    try {
-      const { data } = await saveGame({
-        variables: {
-          input: {
-            gameId: gameToSave.gameId?.toString(),
-            title: gameToSave.title,
-            short_description: gameToSave.short_description,
-            game_url: gameToSave.freetogame_profile_url,
-            genre: gameToSave.category,
-            publisher: gameToSave.publisher,
-            thumbnail: gameToSave.thumbnail,
-          },
-        },
-      });
-  
-      if (data) {
-        setSavedGameIds([...savedGameIds, gameId]);
-        console.log("✅ Game saved successfully!");
-      }
-    } catch (err) {
-      console.error("❌ Error saving game:", err);
-    }
-  };
-  
 
+    const gameId = game.gameId;
+
+    try {
+      await saveGame({
+        variables: { input: game },
+      });
+
+      const newSavedGameIds = [...savedGameIds, gameId];
+      setSavedGameIds(newSavedGameIds);
+    } catch (err) {
+      console.error(err);
+    }
+}
   
-  // const handleSaveGame = async (gameId: string) => {
-    
-  //   const gameToSave: Game | undefined = searchedGames.find(
-  //     (game) => game.gameId === gameId
-  //   );
-  
-  //   if (!gameToSave) {
-  //     console.error("Game not found in searchedGames:", gameId);
-  //     return false;
-  //   }
-  
-  //   // get token
-  //   const token = Auth.loggedIn() ? Auth.getToken() : null;
-  
-  //   if (!token) {
-  //     console.error("User not authenticated");
-  //     return false;
-  //   }
-  
-  //   console.log("Game input for mutation:", gameToSave);
-  
-  //   try {
-  //     await saveGame({
-  //       variables: { input: 
-  //         { ...gameToSave, 
-  //           gameId: gameToSave.gameId,
-  //           title: gameToSave.title,
-  //           short_description: gameToSave.short_description,
-  //           thumbnail: gameToSave.thumbnail,
-  //           freetogame_profile_url: gameToSave.freetogame_profile_url,
-  //           platform: gameToSave.platform,
-  //           genre: gameToSave.genre,
-  //           publisher: gameToSave.publisher,
-          
-  //         } }
-  //     });
-  //     console.log("Game saved:", gameToSave.gameId, gameToSave.id)
-  
-  //     setSavedGameIds([...savedGameIds, gameToSave.gameId]);
-  //   } catch (err) {
-  //     console.error("Error saving game:", err);
-  //   }
-  // };
 
   return (
     <>
@@ -228,7 +153,7 @@ const SearchGames = () => {
                       <Button
                         disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
                         className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game.gameId)}>
+                        onClick={() => handleSaveGame(game)}>
                         {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
