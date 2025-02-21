@@ -68,27 +68,38 @@ const SearchGames = () => {
 
 
 
-  // create function to handle saving a game to our database
+  
   const handleSaveGame = async (gameId: string) => {
-    // find the game in `searchedGames` state by the matching id
-    const gameToSave: Game = searchedGames.find((game) => game.gameId === gameId)!;
+    console.log("Searched Games Array:", searchedGames);
+    console.log("Looking for gameId:", gameId);
 
-    // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    if (!token) {
+    const gameToSave: Game | undefined = searchedGames.find(
+      (game) => game.gameId?.toString() === gameId.toString()
+    );
+  
+    if (!gameToSave) {
+      console.error("Game not found in searchedGames:", gameId);
       return false;
     }
+  
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+  
+    if (!token) {
+      console.error("User not authenticated");
+      return false;
+    }
+  
     console.log("Game input for mutation:", gameToSave);
-
+  
     try {
       await saveGame({
-        variables: { input: gameToSave }
+        variables: { input: { ...gameToSave, gameId: gameToSave.gameId?.toString() } }
       });
-
+  
       setSavedGameIds([...savedGameIds, gameToSave.gameId]);
     } catch (err) {
-      console.error(err);
+      console.error("Error saving game:", err);
     }
   };
 
