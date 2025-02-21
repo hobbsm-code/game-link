@@ -79,13 +79,13 @@ const SearchGames = () => {
     if (!token) {
       return false;
     }
+    console.log("Game input for mutation:", gameToSave);
 
     try {
       await saveGame({
         variables: { input: gameToSave }
       });
 
-      // if game successfully saves to user's account, save game id to state
       setSavedGameIds([...savedGameIds, gameToSave.gameId]);
     } catch (err) {
       console.error(err);
