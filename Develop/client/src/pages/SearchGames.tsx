@@ -41,7 +41,7 @@ const SearchGames = () => {
           freetogame_profile_url: game.freetogame_profile_url,
           category: game.genre,
         }));
-        console.log("Game data:", gameData);
+        
         setSearchedGames(gameData);
       }
     }
@@ -73,7 +73,7 @@ const SearchGames = () => {
   const handleSaveGame = async (gameId: string) => {
     
     const gameToSave: Game | undefined = searchedGames.find(
-      (game) => game.gameId?.toString() === gameId.toString()
+      (game) => game.gameId === gameId.toString()
     );
   
     if (!gameToSave) {
