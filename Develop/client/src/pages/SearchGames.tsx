@@ -92,8 +92,12 @@ const handleSaveGame = async (game: Game) => {
         variables: { input: mappedGame },
       });
 
-      const newSavedGameIds = [...savedGameIds, game.gameId];
-      setSavedGameIds(newSavedGameIds);
+      // const newSavedGameIds = [...savedGameIds, game.gameId];
+      // setSavedGameIds(newSavedGameIds);
+
+      setSavedGameIds((prevIds:any) => [...prevIds, game.gameId]);
+
+
     } catch (err) {
       console.error(err);
     }
