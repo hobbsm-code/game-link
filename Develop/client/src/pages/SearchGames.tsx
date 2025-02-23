@@ -40,7 +40,7 @@ const SearchGames = () => {
           short_description: game.short_description,
           thumbnail: game.thumbnail,
           freetogame_profile_url: game.freetogame_profile_url,
-          category: game.genre,
+          genre: game.genre,
         }));
         
         setSearchedGames(gameData);

@@ -29,7 +29,6 @@ interface SaveGameArgs {
         freetogame_profile_url: string;
         id: number;
         thumbnail: string;
-        category: string;
         time_played?: number;
     }
 }

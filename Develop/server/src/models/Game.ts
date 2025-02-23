@@ -13,7 +13,6 @@ export interface GameDocument extends Document {
   freetogame_profile_url: string;
   id: number;
   thumbnail: string;
-  category: string;
   time_played: number;
 }
 
@@ -60,10 +59,7 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
     required: true,
   },
-  category: {
-    type: String,
-    required: true,
-  },
+  
   time_played: {
     type: Number,
     default: 0,

@@ -1,20 +1,21 @@
 
 const typeDefs = `#graphql
     input GameInput {
-        gameId: ID!
-        title: String
-        short_description: String
-        game_url: String
-        genre: String
-        platform: String
-        publisher: String
-        developer: String
-        release_date: String
-        freetogame_profile_url: String
-        id: Int
-        thumbnail: String
-        time_played: Float
-    }
+    gameId: ID
+    title: String
+    short_description: String
+    game_url: String
+    genre: String
+    platform: String
+    publisher: String
+    developer: String
+    release_date: String
+    freetogame_profile_url: String
+    id: Int
+    thumbnail: String
+    time_played: Float
+}
+
 
     input UserInput {
         username: String!
@@ -24,20 +25,19 @@ const typeDefs = `#graphql
     }
 
     type Game {
-        gameId: ID!
-        title: String
-        short_description: String
-        game_url: String
-        genre: String
-        platform: String
-        publisher: String
-        developer: String
-        release_date: String
-        freetogame_profile_url: String
-        thumbnail: String
-        time_played: Float
-    }
-
+    gameId: ID
+    title: String
+    short_description: String
+    game_url: String
+    genre: String
+    platform: String
+    publisher: String
+    developer: String
+    release_date: String
+    freetogame_profile_url: String
+    thumbnail: String
+    time_played: Float
+}
     type User {
         _id: ID
         username: String
