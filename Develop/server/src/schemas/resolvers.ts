@@ -102,30 +102,23 @@ export const resolvers = {
                 const data = await response.json();
                 console.log("🎮 Raw API Response:", data);
 
-                return data.map ((game: any) => {
-                    return {
-                        gameId: String(game.id),
-                        title: game.title,
-                        thumbnail: game.thumbnail,
-                        short_description: game.short_description,
-                        game_url: game.game_url,
-                        genre: game.genre,
-                        platform: game.platform,
-                        developer: game.developer,
-                        release_date: game.release_date,
-                        freetogame_profile_url: game.freetogame_profile_url,
-                        id: game.id? game.id : undefined,
-                        publisher: game.publisher,
-                    };
-                    }
-                );
-                }
+                const games = data.map((game: any) => ({
+                    gameId: game.id,
+                    title: game.title,
+                    short_description: game.short_description,
+                    thumbnail: game.thumbnail,
+                    genre: game.genre,
+                    publisher: game.publisher,
+                    freetogame_profile_url: game.freetogame_profile_url
+                }));
             
-            catch (error) {
-                console.error(error);
-                throw new Error('Error fetching games');
-            }
+                return games;
         }
+        catch (err) {
+            console.error("🔴 Failed to fetch games:", err);
+            return err;
+        }
+    }
     },
 
 
