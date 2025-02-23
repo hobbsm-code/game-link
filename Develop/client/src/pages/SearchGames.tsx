@@ -72,14 +72,27 @@ const handleSaveGame = async (game: Game) => {
       return false;
     }
 
-    const gameId = game.id;
+    
 
     try {
+      const mappedGame = {
+        gameId: String(game.id), // ✅ Convert API `id` to `gameId`
+        title: game.title,
+        short_description: game.short_description,
+        game_url: game.game_url,
+        genre: game.genre,
+        platform: game.platform,
+        publisher: game.publisher,
+        developer: game.developer,
+        release_date: game.release_date,
+        freetogame_profile_url: game.freetogame_profile_url,
+        thumbnail: game.thumbnail
+    };
       await saveGame({
-        variables: { input: game },
+        variables: { input: mappedGame },
       });
 
-      const newSavedGameIds = [...savedGameIds, gameId];
+      const newSavedGameIds = [...savedGameIds, game.gameId];
       setSavedGameIds(newSavedGameIds);
     } catch (err) {
       console.error(err);
