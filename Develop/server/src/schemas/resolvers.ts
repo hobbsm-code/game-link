@@ -107,9 +107,9 @@ export const resolvers = {
                     title: game.title,
                     short_description: game.short_description,
                     thumbnail: game.thumbnail,
+                    game_url: game.game_url,
                     genre: game.genre,
-                    publisher: game.publisher,
-                    freetogame_profile_url: game.freetogame_profile_url
+                    publisher: game.publisher,freetogame_profile_url: game.freetogame_profile_url
                 }));
             
                 return games;

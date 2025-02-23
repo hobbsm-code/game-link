@@ -55,9 +55,8 @@ const SearchGames = () => {
     "superhero", "permadeath", "card", "battle-royale", "mmo", "mmofps", "mmotps", "3d",
     "2d", "anime", "fantasy", "sci-fi", "fighting", "action-rpg", "action", "military",
     "martial-arts", "flight", "low-spec", "tower-defense", "horror", "mmorts"
-  ].sort((a, b) => a.localeCompare(b)); // Sorts alphabetically
-  
-  // create method to search for games and set state on form submit
+  ].sort((a, b) => a.localeCompare(b));
+
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -73,7 +72,7 @@ const handleSaveGame = async (game: Game) => {
       return false;
     }
 
-    const gameId = game.gameId;
+    const gameId = game.id;
 
     try {
       await saveGame({
