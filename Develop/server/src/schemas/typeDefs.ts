@@ -13,7 +13,6 @@ const typeDefs = `#graphql
         freetogame_profile_url: String
         id: Int
         thumbnail: String
-        category: String
         time_played: Float
     }
 
@@ -40,7 +39,7 @@ const typeDefs = `#graphql
     }
 
     type User {
-        _id: ID!
+        _id: ID
         username: String
         email: String
         gameCount: Int
