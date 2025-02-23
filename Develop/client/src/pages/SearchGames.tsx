@@ -80,7 +80,7 @@ const handleSaveGame = async (game: Game) => {
         title: game.title,
         short_description: game.short_description,
         game_url: game.game_url,
-        genre: game.genre,
+        category: game.genre,
         platform: game.platform,
         publisher: game.publisher,
         developer: game.developer,
