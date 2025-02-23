@@ -166,14 +166,27 @@ const handleSaveGame = async (game: Game) => {
                     
 
                     {Auth.loggedIn() && (
+                      // <Button
+                      //   disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
+                      //   className='btn-block btn-info'
+                      //   onClick={() => handleSaveGame(game)}>
+                      //   {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
+                      //     ? 'This game has already been saved!'
+                      //     : 'Save this Game!'}
+                      // </Button>
                       <Button
-                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
-                        className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game)}>
-                        {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
-                          ? 'This game has already been saved!'
-                          : 'Save this Game!'}
+                          disabled={savedGameIds.includes(game.gameId)} // Only disable for this game
+                          className="btn-block btn-info"
+                          onClick={() => handleSaveGame(game)}
+                        >
+                          {savedGameIds.includes(game.gameId)
+                            ? "This game has already been saved!"
+                            : "Save this Game!"}
                       </Button>
+                        
+
+
+
                     )}
                   </Card.Body>
                 </Card>
