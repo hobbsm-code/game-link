@@ -166,23 +166,23 @@ const handleSaveGame = async (game: Game) => {
                     
 
                     {Auth.loggedIn() && (
-                      <Button
-                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
-                        className='btn-block btn-info'
-                        onClick={() => handleSaveGame(game)}>
-                        {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
-                          ? 'This game has already been saved!'
-                          : 'Save this Game!'}
-                      </Button>
                       // <Button
-                      //     disabled={savedGameIds.includes(String(game.gameId))} // Only disable for this game
-                      //     className="btn-block btn-info"
-                      //     onClick={() => handleSaveGame(game)}
-                      //   >
-                      //     {savedGameIds.includes(game.gameId)
-                      //       ? "This game has already been saved!"
-                      //       : "Save this Game!"}
+                      //   disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
+                      //   className='btn-block btn-info'
+                      //   onClick={() => handleSaveGame(game)}>
+                      //   {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
+                      //     ? 'This game has already been saved!'
+                      //     : 'Save this Game!'}
                       // </Button>
+                      <Button
+                          disabled={savedGameIds.includes(String(game.id))} // Only disable for this game
+                          className="btn-block btn-info"
+                          onClick={() => handleSaveGame(game)}
+                        >
+                          {savedGameIds.includes(String(game.id))
+                            ? "This game has already been saved!"
+                            : "Save this Game!"}
+                      </Button>
                     )}
                   </Card.Body>
                 </Card>
