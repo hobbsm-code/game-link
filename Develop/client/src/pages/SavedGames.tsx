@@ -122,7 +122,7 @@ const SavedGames = () => {
           {userData.savedGames.map((game: Game) => {
             return (
               <Col md='4'>
-                <Card key={game.id} border='dark'>
+                <Card key={game.id} border='dark' className="p-3">
                   {game.thumbnail ? (
                     <Card.Img
                       src={game.thumbnail}
@@ -141,7 +141,7 @@ const SavedGames = () => {
                     <Card.Text>{game.short_description }</Card.Text>
 
                     <Button
-                      className='btn-block btn-danger'
+                      className='btn-block btn-danger p-3'
                       onClick={() => {
                         
                         handleDeleteGame(game.id)}}
@@ -156,7 +156,7 @@ const SavedGames = () => {
                     <strong>Current Session:</strong> {playtime} hours
                     </p>
 
-                    <Button className="btn-block btn-success" onClick={handleSubmitPlaytime}>
+                    <Button className="btn-block btn-success p-3" onClick={handleSubmitPlaytime}>
                       Submit Playtime
                     </Button>
                   </>
