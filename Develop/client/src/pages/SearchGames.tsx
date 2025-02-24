@@ -111,7 +111,7 @@ const SearchGames = () => {
                 <Form.Select
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
-              size="lg"
+              size="lg" className= 'mt-3'
             >
               <option value="">Select a Category</option>
               {categories.map((category) => (
@@ -124,7 +124,7 @@ const SearchGames = () => {
 
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' variant='success' size='lg' className= 'mt-3'>
                   Submit Search
                 </Button>
               </Col>
@@ -147,7 +147,7 @@ const SearchGames = () => {
           {searchedGames.map((game) => {
             return (
               <Col md="4" key={game.id}>
-                <Card border='dark'>
+                <Card border='dark'  className="p-3">
                   {game.thumbnail ? ( 
                     <Card.Img src={game.thumbnail} alt={`The cover for ${game.title}`} variant='top' />
                   ) : null}
