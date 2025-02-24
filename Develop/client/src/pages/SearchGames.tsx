@@ -69,6 +69,10 @@ const SearchGames = () => {
 
   // create function to handle saving a game to our database
   const handleSaveGame = async (gameId: string) => {
+    if (!gameId) {
+      console.error("Error: gameId is undefined.");
+      return;
+    }
     // find the game in `searchedGames` state by the matching id
     const gameToSave: Game = searchedGames.find((game) => game.gameId === gameId)!;
 
