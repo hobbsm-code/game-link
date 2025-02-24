@@ -1,7 +1,7 @@
 import { Schema, type Document } from 'mongoose';
 
 export interface GameDocument extends Document {
-  gameId: string;
+  id: string;
   title: string;
   short_description: string;
   game_url: string;
@@ -11,13 +11,12 @@ export interface GameDocument extends Document {
   developer: string;
   release_date: string;
   freetogame_profile_url: string;
-  id: number;
   thumbnail: string;
   time_played: number;
 }
 
 const gameSchema = new Schema<GameDocument>({
-  gameId: {
+  id: {
     type: String,
     required: true,
   },
@@ -52,9 +51,7 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
     required: true,
   },
-  id: {
-    type: Number,
-  },
+ 
   thumbnail: {
     type: String,
     required: true,

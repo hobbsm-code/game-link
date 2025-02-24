@@ -1,5 +1,5 @@
 export interface Game {
-  gameId: string;
+  id: string;
   title: string;
   short_description: string;
   game_url: string;
@@ -9,8 +9,6 @@ export interface Game {
   developer: string;
   release_date: string;
   freetogame_profile_url: string;
-  id: number;
   thumbnail: string;
-  category: string;
   time_played: number;
 }

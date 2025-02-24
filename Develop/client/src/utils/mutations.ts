@@ -33,7 +33,7 @@ export const SAVE_GAME = gql`
       username
       email
       savedGames {
-        gameId
+        id
         title
         short_description
         thumbnail
@@ -51,13 +51,13 @@ export const SAVE_GAME = gql`
 
 
 export const REMOVE_GAME = gql`
-  mutation removeGame($gameId: ID!) {
-    removeGame(gameId: $gameId) {
+  mutation removeGame($id: ID!) {
+    removeGame(id: $id) {
       _id
       username
       email
       savedGames {
-        gameId
+        id
         title
         short_description
         thumbnail
@@ -71,9 +71,9 @@ export const REMOVE_GAME = gql`
 `;
 
 export const SUBMIT_PLAYTIME = gql`
-  mutation submitPlaytime($gameId: ID!, $hours: Float!) {
-    submitPlaytime(gameId: $gameId, hours: $hours) {
-      gameId
+  mutation submitPlaytime($id: ID!, $hours: Float!) {
+    submitPlaytime(id: $id, hours: $hours) {
+      id
       time_played
     }
   }

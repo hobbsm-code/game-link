@@ -17,33 +17,31 @@ interface AddUserArgs {
 
 interface SaveGameArgs {
     input: {
-        gameId: string;
+        id: string;
         title: string;
+        thumbnail: string;
         short_description: string;
         game_url: string;
         genre: string;
-        platform: string;
         publisher: string;
         developer: string;
         release_date: string;
         freetogame_profile_url: string;
-        id: number;
-        thumbnail: string;
-        time_played?: number;
-    }
+        time_played: number;
+        }
 }
 
 interface RemoveGameArgs {
-    gameId: string;
+    id: string;
 }
 
 interface SubmitPlaytimeArgs {
-    gameId: string;
+    id: string;
     hours: number;
 }
  interface LeaderboardEntry {
     username: string;
-    gameId: string;
+    id: string;
     title: string;
     totalTimePlayed: number;
  }
@@ -54,17 +52,12 @@ export const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .populate('savedGames')
-                    .populate('savedGames')
+                    
                 return userData;
             }
             throw new AuthenticationError('Not logged in');
         },
-        // leaderboard: async () => {
-        //     return User.find()
-        //         .sort({ time_played: -1 })
-        //         .select('-__v -password')
-        //         .limit(10);
-        // }
+        
         getLeaderboard: async () => {
             const users = await User.find().select('username savedGames');
         
@@ -74,7 +67,7 @@ export const resolvers = {
                 user.savedGames.forEach(game => {
                     leaderboard.push({
                         username: user.username,
-                        gameId: game.gameId,
+                        id: game.id,
                         title: game.title,
                         totalTimePlayed: parseFloat((game.time_played || 0).toFixed(2))
                     });
@@ -102,7 +95,7 @@ export const resolvers = {
                 console.log("🎮 Raw API Response:", data);
 
                 const games = data.map((game: any) => ({
-                    gameId: game.id,
+                    id: game.id,
                     title: game.title,
                     short_description: game.short_description,
                     thumbnail: game.thumbnail,
@@ -110,6 +103,7 @@ export const resolvers = {
                     genre: game.genre,
                     publisher: game.publisher,freetogame_profile_url: game.freetogame_profile_url
                 }));
+                console.log("🎮 Formatted games:", games)   ;
             
                 return games;
         }
@@ -155,9 +149,9 @@ export const resolvers = {
             }
         },
         saveGame: async (_parent: any, { input }: SaveGameArgs, context: any) => {
-            if (!input.gameId) {
-                console.error("❌ title is missing, cannot save game:", input);
-                throw new Error("Game ID is required to save the game.");
+            if (!input.id) {
+                console.error("❌ id is missing, cannot save game:", input);
+                throw new Error("Game id is required to save the game.");
             }
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
@@ -170,14 +164,14 @@ export const resolvers = {
             throw new AuthenticationError('Cannot save game');            
         },
 
-        submitPlaytime: async (_parent: any, { gameId, hours }: SubmitPlaytimeArgs, context: any) => {
+        submitPlaytime: async (_parent: any, { id, hours }: SubmitPlaytimeArgs, context: any) => {
             if (!context.user) throw new AuthenticationError('You must be logged in');
         
             console.log("✅ User:", context.user._id);
-            console.log("🎮 Game ID:", gameId);
+            console.log("🎮 Game ID:", id);
             console.log("⏳ Adding playtime:", hours, "hours");
         
-            const user = await User.findOne({ _id: context.user._id, "savedGames.gameId": gameId });
+            const user = await User.findOne({ _id: context.user._id, "savedGames.id": id });
         
             if (!user) {
                 console.error("❌ Game not found in savedGames or user does not exist.");
@@ -185,7 +179,7 @@ export const resolvers = {
             }
         
             // Find the game in `savedGames`
-            const gameIndex = user.savedGames.findIndex(game => game.gameId === gameId);
+            const gameIndex = user.savedGames.findIndex(game => game.id === id);
             if (gameIndex === -1) {
                 console.error("❌ Game not found in user's saved games.");
                 throw new Error('Game not found.');
@@ -201,14 +195,14 @@ export const resolvers = {
         
         
 
-        removeGame: async (_parent: any, { gameId }: RemoveGameArgs, context: any) => {
+        removeGame: async (_parent: any, { id }: RemoveGameArgs, context: any) => {
             if (!context.user) {
               throw new AuthenticationError('Not logged in');
             }
           
             const updatedUser = await User.findOneAndUpdate(
               { _id: context.user._id },
-              { $pull: { savedGames: { gameId: gameId } } },
+              { $pull: { savedGames: { id: id } } },
               { new: true }
             );
           

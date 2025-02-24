@@ -29,23 +29,28 @@ const SearchGames = () => {
 
   const { loading, error } = useQuery(GET_FREE_GAMES, {
     variables: { category: selectedCategory },
-    skip: !selectedCategory, // Skip query until a category is selected
+    skip: !selectedCategory, 
     onCompleted: (data) => {
       if (data && data.getFreeGames) {
         const gameData = data.getFreeGames.map((game: Game) => ({
-          gameId: game.id? game.id.toString(): undefined,
-          id: game.id? game.id.toString(): undefined,
-          publisher: game.publisher || 'No publisher to display',
+          id: game.id,
           title: game.title,
           short_description: game.short_description,
-          thumbnail: game.thumbnail,
-          freetogame_profile_url: game.freetogame_profile_url,
+          game_url: game.game_url,
           genre: game.genre,
+          platform: game.platform,
+          publisher: game.publisher,
+          developer: game.developer,
+          release_date: game.release_date,
+          freetogame_profile_url: game.freetogame_profile_url,
+          thumbnail: game.thumbnail,
+          time_played: game.time_played
         }));
         
         setSearchedGames(gameData);
       }
     }
+    
   });
   
   const categories = [
@@ -65,18 +70,17 @@ const SearchGames = () => {
     }
 
     setSelectedCategory(searchInput);
+    
   };
 
-  // create function to handle saving a game to our database
-  const handleSaveGame = async (gameId: string) => {
-    if (!gameId) {
+  const handleSaveGame = async (id: string) => {
+    if (!id) {
       console.error("Error: gameId is undefined.");
       return;
     }
-    // find the game in `searchedGames` state by the matching id
-    const gameToSave: Game = searchedGames.find((game) => game.gameId === gameId)!;
+    
+    const gameToSave: Game = searchedGames.find((game) => game.id === id)!;
 
-    // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -88,8 +92,7 @@ const SearchGames = () => {
         variables: { input: gameToSave }
       });
 
-      // if game successfully saves to user's account, save game id to state
-      setSavedGameIds([...savedGameIds, gameToSave.gameId]);
+      setSavedGameIds([...savedGameIds, gameToSave.id]);
     } catch (err) {
       console.error(err);
     }
@@ -143,7 +146,7 @@ const SearchGames = () => {
         <Row>
           {searchedGames.map((game) => {
             return (
-              <Col md="4" key={game.gameId}>
+              <Col md="4" key={game.id}>
                 <Card border='dark'>
                   {game.thumbnail ? ( 
                     <Card.Img src={game.thumbnail} alt={`The cover for ${game.title}`} variant='top' />
@@ -159,10 +162,10 @@ const SearchGames = () => {
 
                     {Auth.loggedIn() && (
                       <Button
-                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
+                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.id)}
                         className='btn-block btn-info'
-                        onClick={() => game.gameId && handleSaveGame(game.gameId)}>
-                        {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
+                        onClick={() => game.id && handleSaveGame(game.id)}>
+                        {savedGameIds?.some((savedGameId: string) => savedGameId === game.id)
                           ? 'This game has already been saved!'
                           : 'Save this Game!'}
                       </Button>

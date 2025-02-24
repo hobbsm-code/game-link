@@ -1,18 +1,17 @@
 
 const typeDefs = `#graphql
     input GameInput {
-    gameId: ID
+    id: ID
     title: String
+    thumbnail: String
     short_description: String
     game_url: String
     genre: String
-    platform: String
+    
     publisher: String
     developer: String
     release_date: String
     freetogame_profile_url: String
-    id: Int
-    thumbnail: String
     time_played: Float
 }
 
@@ -25,7 +24,7 @@ const typeDefs = `#graphql
     }
 
     type Game {
-    gameId: ID
+    id: ID
     title: String
     short_description: String
     game_url: String
@@ -54,7 +53,7 @@ const typeDefs = `#graphql
 
     type LeaderboardEntry {
     username: String
-    gameId: String
+    id: String
     title: String
     totalTimePlayed: Float
 }
@@ -69,8 +68,8 @@ const typeDefs = `#graphql
         login(email: String!, password: String!): Auth
         addUser(input: UserInput!): Auth
         saveGame(input: GameInput): User
-        removeGame(gameId: ID!): User
-        submitPlaytime(gameId: ID!, hours: Float): Game
+        removeGame(id: ID!): User
+        submitPlaytime(id: ID!, hours: Float): Game
         
     }
 `;

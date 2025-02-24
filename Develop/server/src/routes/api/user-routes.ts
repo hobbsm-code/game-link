@@ -17,6 +17,6 @@ router.route('/login').post(login);
 
 router.route('/me').get(authenticateToken, getSingleUser);
 
-router.route('/games/:gameId').delete(authenticateToken, deleteGame);
+router.route('/games/:id').delete(authenticateToken, deleteGame);
 
 export default router;

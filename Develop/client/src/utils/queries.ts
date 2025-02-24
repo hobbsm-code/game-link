@@ -8,7 +8,7 @@ export const GET_ME = gql`
       email
       gameCount
       savedGames {
-        gameId
+        id
         title
         short_description
         thumbnail
@@ -26,7 +26,7 @@ export const GET_LEADERBOARD = gql`
   query getLeaderboard {
     getLeaderboard {
       username
-      gameId
+      id
       title
       totalTimePlayed
     }
@@ -36,7 +36,7 @@ export const GET_LEADERBOARD = gql`
 export const GET_FREE_GAMES = gql`
   query getFreeGames ($category: String!) {
     getFreeGames (category: $category)  {
-      gameId
+      id
       title
       thumbnail
       short_description

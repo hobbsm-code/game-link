@@ -32,10 +32,10 @@ const SavedGames = () => {
   }, [startTime]);
 
  // Start tracking playtime
- const handleStartPlaying = (gameId: string) => {
+ const handleStartPlaying = (id: string) => {
   setStartTime(Date.now());
   setPlaytime(0);
-  setActiveGameId(gameId);
+  setActiveGameId(id);
 };
 
 // Submit playtime
@@ -50,13 +50,13 @@ const SavedGames = () => {
         return;
     }
 
-    console.log("Submitting playtime data:", { gameId: activeGameId, hours: hoursPlayed });
+    console.log("Submitting playtime data:", { id: activeGameId, hours: hoursPlayed });
 
     
 
     try {
       const { data } = await submitPlaytime({
-          variables: { gameId: activeGameId, hours: hoursPlayed },
+          variables: { id: activeGameId, hours: hoursPlayed },
           refetchQueries: [{ query: GET_ME }], // Refetch updated data
       });
 
@@ -71,8 +71,8 @@ const SavedGames = () => {
     setActiveGameId(null);
 };
   // create function that accepts the game's mongo _id value as param and deletes the games from the database
-  const handleDeleteGame = async (gameId: string) => {
-    removeGameId(gameId);
+  const handleDeleteGame = async (id: string) => {
+    removeGameId(id);
     
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -84,10 +84,10 @@ const SavedGames = () => {
 
     try {
       removeGame({
-        variables: { gameId },
+        variables: { id },
       });
 
-      removeGameId(gameId);
+      removeGameId(id);
     } catch (err) {
       console.error(err);
     }
@@ -122,7 +122,7 @@ const SavedGames = () => {
           {userData.savedGames.map((game: Game) => {
             return (
               <Col md='4'>
-                <Card key={game.gameId} border='dark'>
+                <Card key={game.id} border='dark'>
                   {game.thumbnail ? (
                     <Card.Img
                       src={game.thumbnail}
@@ -144,12 +144,12 @@ const SavedGames = () => {
                       className='btn-block btn-danger'
                       onClick={() => {
                         
-                        handleDeleteGame(game.gameId)}}
+                        handleDeleteGame(game.id)}}
                     >
                       Delete this Game!
                     </Button>
                     
-                    {activeGameId === game.gameId ? (
+                    {activeGameId === game.id ? (
                   <>
                     <p className="mt-2 small">
                     <strong>Total Time Played:</strong> {game.time_played || 0} hours <br />
@@ -161,7 +161,7 @@ const SavedGames = () => {
                     </Button>
                   </>
                 ) : (
-                  <Button className="btn-block btn-primary" onClick={() => handleStartPlaying(game.gameId)}>
+                  <Button className="btn-block btn-primary" onClick={() => handleStartPlaying(game.id)}>
                     Start Playing
                   </Button>
                 )}
