@@ -103,7 +103,7 @@ export const resolvers = {
                     genre: game.genre,
                     publisher: game.publisher,freetogame_profile_url: game.freetogame_profile_url
                 }));
-                console.log("🎮 Formatted games:", games)   ;
+                
             
                 return games;
         }
