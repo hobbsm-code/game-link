@@ -67,41 +67,29 @@ const SearchGames = () => {
     setSelectedCategory(searchInput);
   };
 
-const handleSaveGame = async (game: Game) => {
-    if (!Auth.loggedIn()) {
+  // create function to handle saving a game to our database
+  const handleSaveGame = async (gameId: string) => {
+    // find the game in `searchedGames` state by the matching id
+    const gameToSave: Game = searchedGames.find((game) => game.gameId === gameId)!;
+
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
       return false;
     }
 
-    
-
     try {
-      const mappedGame = {
-        gameId: String(game.id), // ✅ Convert API `id` to `gameId`
-        title: game.title,
-        short_description: game.short_description,
-        game_url: game.game_url,
-        genre: game.genre,
-        platform: game.platform,
-        publisher: game.publisher,
-        developer: game.developer,
-        release_date: game.release_date,
-        freetogame_profile_url: game.freetogame_profile_url,
-        thumbnail: game.thumbnail
-    };
       await saveGame({
-        variables: { input: mappedGame },
+        variables: { input: gameToSave }
       });
 
-      // const newSavedGameIds = [...savedGameIds, game.gameId];
-      // setSavedGameIds(newSavedGameIds);
-
-      setSavedGameIds((prevIds:any) => [...prevIds, game.gameId]);
-
-
+      // if game successfully saves to user's account, save game id to state
+      setSavedGameIds([...savedGameIds, gameToSave.gameId]);
     } catch (err) {
       console.error(err);
     }
-}
+  };
   
 
   return (
@@ -166,23 +154,15 @@ const handleSaveGame = async (game: Game) => {
                     
 
                     {Auth.loggedIn() && (
-                      // <Button
-                      //   disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
-                      //   className='btn-block btn-info'
-                      //   onClick={() => handleSaveGame(game)}>
-                      //   {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
-                      //     ? 'This game has already been saved!'
-                      //     : 'Save this Game!'}
-                      // </Button>
                       <Button
-                          disabled={savedGameIds.includes(String(game.id))} // Only disable for this game
-                          className="btn-block btn-info"
-                          onClick={() => handleSaveGame(game)}
-                        >
-                          {savedGameIds.includes(String(game.id))
-                            ? "This game has already been saved!"
-                            : "Save this Game!"}
+                        disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)}
+                        className='btn-block btn-info'
+                        onClick={() => handleSaveGame(game.gameId)}>
+                        {savedGameIds?.some((savedGameId: string) => savedGameId === game.gameId)
+                          ? 'This game has already been saved!'
+                          : 'Save this Game!'}
                       </Button>
+                      
                     )}
                   </Card.Body>
                 </Card>
