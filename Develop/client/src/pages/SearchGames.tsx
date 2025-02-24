@@ -92,10 +92,10 @@ const handleSaveGame = async (game: Game) => {
         variables: { input: mappedGame },
       });
 
-      const newSavedGameIds = [...savedGameIds, game.gameId];
-      setSavedGameIds(newSavedGameIds);
+      // const newSavedGameIds = [...savedGameIds, game.gameId];
+      // setSavedGameIds(newSavedGameIds);
 
-      // setSavedGameIds((prevIds:any) => [...prevIds, game.gameId]);
+      setSavedGameIds((prevIds:any) => [...prevIds, game.gameId]);
 
 
     } catch (err) {
@@ -175,7 +175,7 @@ const handleSaveGame = async (game: Game) => {
                       //     : 'Save this Game!'}
                       // </Button>
                       <Button
-                          disabled={savedGameIds.includes(game.gameId)} // Only disable for this game
+                          disabled={savedGameIds.includes(String(game.gameId))} // Only disable for this game
                           className="btn-block btn-info"
                           onClick={() => handleSaveGame(game)}
                         >
@@ -183,10 +183,6 @@ const handleSaveGame = async (game: Game) => {
                             ? "This game has already been saved!"
                             : "Save this Game!"}
                       </Button>
-                        
-
-
-
                     )}
                   </Card.Body>
                 </Card>
