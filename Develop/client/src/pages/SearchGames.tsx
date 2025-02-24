@@ -16,7 +16,7 @@ import Auth from '../utils/auth';
 
 import { GET_FREE_GAMES } from '../utils/queries';
 import { SAVE_GAME } from '../utils/mutations';
-import {  getSavedGameIds } from '../utils/localStorage';
+import {getSavedGameIds } from '../utils/localStorage';
 import type { Game } from '../models/Game';
 
 
@@ -92,10 +92,10 @@ const handleSaveGame = async (game: Game) => {
         variables: { input: mappedGame },
       });
 
-      // const newSavedGameIds = [...savedGameIds, game.gameId];
-      // setSavedGameIds(newSavedGameIds);
+      const newSavedGameIds = [...savedGameIds, game.gameId];
+      setSavedGameIds(newSavedGameIds);
 
-      setSavedGameIds((prevIds:any) => [...prevIds, game.gameId]);
+      // setSavedGameIds((prevIds:any) => [...prevIds, game.gameId]);
 
 
     } catch (err) {
