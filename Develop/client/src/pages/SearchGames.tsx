@@ -105,7 +105,7 @@ const SearchGames = () => {
         <Container>
           <h1>Search for Games!</h1>
           <Form onSubmit={handleFormSubmit}>
-            <Row>
+            <Row >
               <Col xs={12} md={8}>
                 
                 <Form.Select
@@ -123,8 +123,8 @@ const SearchGames = () => {
               
 
               </Col>
-              <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg' className= 'mt-3'>
+              <Col xs={12} md={4} className='px-10'>
+                <Button type='submit' variant='success' size='lg' className= 'mt-3 p-2'>
                   Submit Search
                 </Button>
               </Col>
@@ -163,7 +163,7 @@ const SearchGames = () => {
                     {Auth.loggedIn() && (
                       <Button
                         disabled={savedGameIds?.some((savedGameId: string) => savedGameId === game.id)}
-                        className='btn-block btn-info'
+                        className='btn-block btn-info p-3'
                         onClick={() => game.id && handleSaveGame(game.id)}>
                         {savedGameIds?.some((savedGameId: string) => savedGameId === game.id)
                           ? 'This game has already been saved!'
